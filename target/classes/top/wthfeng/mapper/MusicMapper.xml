@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.wthfeng.dao.MusicDAO" >
+
+    <!--按条件查询歌曲-->
+    <select id="list" parameterType="top.wthfeng.model.param.SearchMusicParam"
+    resultType="top.wthfeng.model.view.ViewMusic">
+        SELECT * FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+         <where>
+             <if test="musicName!=null and musicName!='' ">
+               <bind name="nameStr" value=" '%'+musicName+'%'" />
+                  m.name LIKE #{nameStr}
+             </if>
+             <if test="singerName!=null and singerName!='' ">
+                 <bind name="singerNameStr" value="'%'+singerName+'%'" />
+                 and s.name LIKE #{singerNameStr}
+             </if>
+             <if test="album!=null and album!='' ">
+                 <bind name="albumStr" value="'%'+album+'%'" />
+                 and m.album LIKE #{albumStr}
+             </if>
+         </where>
+        limit #{page},#{offSet}
+    </select>
+
+    <select id="listNum" parameterType="top.wthfeng.model.param.SearchMusicParam" resultType="java.lang.Integer">
+        SELECT COUNT (s.id) FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+        <where>
+            <if test="musicName!=null and musicName!='' ">
+                <bind name="nameStr" value=" '%'+musicName+'%'" />
+                m.name LIKE #{nameStr}
+            </if>
+            <if test="singerName!=null and singerName!='' ">
+                <bind name="singerNameStr" value="'%'+singerName+'%'" />
+                and s.name LIKE #{singerNameStr}
+            </if>
+            <if test="album!=null and album!='' ">
+                <bind name="albumStr" value="'%'+album+'%'" />
+                and m.album LIKE #{albumStr}
+            </if>
+        </where>
+    </select>
+</mapper>

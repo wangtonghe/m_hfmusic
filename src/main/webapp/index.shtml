@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="和风音乐网管理后台">
+    <meta name="author" content="和风科技">
+
+    <title>和风音乐网管理后台</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+   <!--#include virtual="web/head.html" -->
+
+   <div class="container-fluid">
+     <div class="row">
+       <!--#include virtual="web/left-menu.html" -->
+       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+         <!--#include virtual="web/user-manager.html" -->
+         <!--#include virtual="web/user-suggest.html" -->
+         <!--#include virtual="web/music-manager.html" -->
+         <!--#include virtual="web/form-manager.html" -->
+         <!--#include virtual="web/music-recommend.html" -->
+         <!--#include virtual="web/music-collect.html" -->
+
+
+
+
+       </div>
+     </div>
+
+   </div>
+
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
