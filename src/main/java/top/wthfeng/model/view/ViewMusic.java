@@ -14,6 +14,11 @@ public class ViewMusic {
     private String cover;
     private String musicUrl;
     private String lyric;
+    /**
+     * 歌曲上下线，0为下线，1为上线
+     */
+    private Integer online;
+
 
     public Integer getId() {
         return id;
@@ -69,5 +74,13 @@ public class ViewMusic {
 
     public void setLyric(String lyric) {
         this.lyric = lyric;
+    }
+
+    public Integer getOnline() {
+        return online;
+    }
+
+    public void setOnline(Integer online) {
+        this.online = online;
     }
 }

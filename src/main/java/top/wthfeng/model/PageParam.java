@@ -23,7 +23,7 @@ public class PageParam {
     public Integer getOffSet() {
         page=(page==null?DEFAULTPAGE:page);
         num=(num==null?DEFAULTNUM:num);
-        return (page-1)*num;
+        return page*num;
 
     }
 
@@ -32,7 +32,8 @@ public class PageParam {
     }
 
     public Integer getPage() {
-        return page;
+        page=(page==null?DEFAULTPAGE:page);
+        return page-1;
     }
 
     public void setPage(Integer page) {

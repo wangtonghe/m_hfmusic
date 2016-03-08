@@ -6,4 +6,5 @@ package top.wthfeng.intercepter;
  * @Email : wthfeng@126.com
  */
 public class AccessLogInterceptor {
+
 }

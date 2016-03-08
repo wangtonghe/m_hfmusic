@@ -5,6 +5,7 @@ import top.wthfeng.model.param.SearchMusicParam;
 import top.wthfeng.model.view.ViewMusic;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : wangtonghe
@@ -40,8 +41,8 @@ public interface MusicDAO {
 
     /**
      * 音乐上下线
-     * @param flag
+     * @param param
      */
-    void online(Byte flag);
+    void online(Map<String,Object> param);
 
 }

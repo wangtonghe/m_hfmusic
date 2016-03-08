@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+      <link href="css/music-manager.css" rel="stylesheet">
 
   </head>
 
@@ -30,17 +31,16 @@
          <!--#include virtual="web/form-manager.html" -->
          <!--#include virtual="web/music-recommend.html" -->
          <!--#include virtual="web/music-collect.html" -->
-
-
-
-
        </div>
      </div>
 
    </div>
 
+
     <script src="js/jquery-2.1.4.js"></script>
+  <!-- <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>-->
     <script src="js/bootstrap.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/music-manager.js"></script>
   </body>
 </html>

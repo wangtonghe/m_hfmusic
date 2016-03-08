@@ -11,6 +11,7 @@ import top.wthfeng.model.view.ViewMusic;
 import top.wthfeng.service.MusicService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : wangtonghe
@@ -46,8 +47,8 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public void online(Byte flag)throws Exception {
-        musicDAO.online(flag);
+    public void online(Map<String,Object> param)throws Exception {
+        musicDAO.online(param);
 
     }
 }

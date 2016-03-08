@@ -25,6 +25,7 @@ public class AccessInterceptor implements HandlerInterceptor {
            Map<String, Object> result = new HashMap<>();
             result.put("code",1);
             result.put("data","请重新登陆！");
+            httpServletResponse.setCharacterEncoding("utf-8");
             httpServletResponse.getWriter().write(StringUtil.map2json(result));
             httpServletResponse.getWriter().close();
             flag=false;

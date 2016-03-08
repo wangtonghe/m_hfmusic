@@ -12,6 +12,7 @@ public class SearchMusicParam extends PageParam{
     private String singerName;
     private String album;
 
+
     public String getSingerName() {
         return singerName;
     }

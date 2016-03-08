@@ -5,11 +5,13 @@
     <!--按条件查询歌曲-->
     <select id="list" parameterType="top.wthfeng.model.param.SearchMusicParam"
     resultType="top.wthfeng.model.view.ViewMusic">
-        SELECT * FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
-         <where>
+        SELECT m.id,m.album,m.cover,m.lyric,m.name as musicName,s.name as singerName,m.url as musicUrl,m.online
+        FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+        WHERE 1=1
+
              <if test="musicName!=null and musicName!='' ">
                <bind name="nameStr" value=" '%'+musicName+'%'" />
-                  m.name LIKE #{nameStr}
+                 and  m.name LIKE #{nameStr}
              </if>
              <if test="singerName!=null and singerName!='' ">
                  <bind name="singerNameStr" value="'%'+singerName+'%'" />
@@ -19,16 +21,16 @@
                  <bind name="albumStr" value="'%'+album+'%'" />
                  and m.album LIKE #{albumStr}
              </if>
-         </where>
         limit #{page},#{offSet}
     </select>
 
+    <!--按条件查询歌曲所查询到的数目-->
     <select id="listNum" parameterType="top.wthfeng.model.param.SearchMusicParam" resultType="java.lang.Integer">
-        SELECT COUNT (s.id) FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
-        <where>
+        SELECT COUNT(m.id) FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+      WHERE 1=1
             <if test="musicName!=null and musicName!='' ">
                 <bind name="nameStr" value=" '%'+musicName+'%'" />
-                m.name LIKE #{nameStr}
+               AND  m.name LIKE #{nameStr}
             </if>
             <if test="singerName!=null and singerName!='' ">
                 <bind name="singerNameStr" value="'%'+singerName+'%'" />
@@ -38,6 +40,19 @@
                 <bind name="albumStr" value="'%'+album+'%'" />
                 and m.album LIKE #{albumStr}
             </if>
-        </where>
     </select>
+
+    <insert id="add" parameterType="top.wthfeng.model.param.EditMusicParam">
+        INSERT INTO music(`name`,singerId,lyric,url,album,cover,online)
+        VALUES (#{musicName},#{singerId},#{lyric},#{musicUrl},#{album},#{cover},#{online})
+    </insert>
+
+    <update id="edit" parameterType="top.wthfeng.model.param.EditMusicParam">
+        UPDATE music SET `name`=#{musicName},singerId=#{singerId},lyric=#{lyric},url=#{musicUrl},
+        album=#{album},cover=#{cover} WHERE id=#{id}
+    </update>
+
+    <update id="online" parameterType="java.util.Map">
+        UPDATE music SET online=#{flag} WHERE id=#{id}
+    </update>
 </mapper>

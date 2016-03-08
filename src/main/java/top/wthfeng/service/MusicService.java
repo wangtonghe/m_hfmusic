@@ -5,6 +5,8 @@ import top.wthfeng.model.param.EditMusicParam;
 import top.wthfeng.model.param.SearchMusicParam;
 import top.wthfeng.model.view.ViewMusic;
 
+import java.util.Map;
+
 /**
  * 歌曲管理
  * @Author : wangtonghe
@@ -35,8 +37,8 @@ public interface MusicService {
 
     /**
      * 音乐上下线
-     * @param flag
+     * @param param
      */
-    void online(Byte flag)throws Exception;
+    void online(Map<String,Object> param)throws Exception;
 
 }
