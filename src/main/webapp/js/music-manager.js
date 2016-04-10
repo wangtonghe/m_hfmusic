@@ -71,7 +71,7 @@ function initData(){
     var album = $("#mm_album").val();
     $.ajax({
         "url":"admin/music/list",
-        "data":{musicName:musicName,singerName:singerName,alnum:album},
+        "data":{musicName:musicName,singerName:singerName,album:album},
         "dataType":"json",
         "type":"POST",
         "success":function(data){

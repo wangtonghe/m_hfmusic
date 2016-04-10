@@ -11,7 +11,7 @@
   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
     <!--  自动包扫描，将该包注解含有controller的作为控制器，与spring-mybatis的包扫描不同 -->
-    <context:component-scan base-package="top.wthfeng.controller"/>
+    <context:component-scan base-package="top.wthfeng.mhfmusic.controller"/>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
@@ -70,7 +70,7 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/sysUser/login"/>
             <mvc:exclude-mapping path="/music/*"/>
-            <bean class="top.wthfeng.intercepter.AccessInterceptor"/>
+            <bean class="top.wthfeng.mhfmusic.intercepter.AccessInterceptor"/>
         </mvc:interceptor>
 
 

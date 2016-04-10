@@ -1,13 +1,13 @@
-package top.wthfeng.controller;
+package top.wthfeng.mhfmusic.controller;
 
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import top.wthfeng.model.param.EditMusicParam;
-import top.wthfeng.model.param.SearchMusicParam;
-import top.wthfeng.service.MusicService;
+import top.wthfeng.mhfmusic.model.param.EditMusicParam;
+import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
+import top.wthfeng.mhfmusic.service.MusicService;
 
 import javax.annotation.Resource;
 import java.util.HashMap;

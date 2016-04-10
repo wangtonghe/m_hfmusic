@@ -43,12 +43,12 @@
     <!--   创建mybatis的sqlSessionFactory,生产session的工厂 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath:top/wthfeng/mapper/*.xml" />
+        <property name="mapperLocations" value="classpath:top/wthfeng/mhfmusic/mapper/*.xml" />
     </bean>
 
     <!--  使用包扫描的方式对dao接口进行扫描，将其下所有接口映射为Mapper接口代理 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="top.wthfeng.dao" />
+        <property name="basePackage" value="top.wthfeng.mhfmusic.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 

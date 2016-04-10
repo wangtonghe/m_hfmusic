@@ -1,8 +1,8 @@
-package top.wthfeng.dao;
+package top.wthfeng.mhfmusic.dao;
 
-import top.wthfeng.model.param.EditMusicParam;
-import top.wthfeng.model.param.SearchMusicParam;
-import top.wthfeng.model.view.ViewMusic;
+import top.wthfeng.mhfmusic.model.param.EditMusicParam;
+import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
+import top.wthfeng.mhfmusic.model.view.ViewMusic;
 
 import java.util.List;
 import java.util.Map;

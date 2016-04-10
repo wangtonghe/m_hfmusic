@@ -1,4 +1,4 @@
-package top.wthfeng.model;
+package top.wthfeng.mhfmusic.model;
 
 /**
  * @Author : wangtonghe

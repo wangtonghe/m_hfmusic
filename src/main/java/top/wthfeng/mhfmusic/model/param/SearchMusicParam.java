@@ -1,13 +1,13 @@
-package top.wthfeng.model.param;
+package top.wthfeng.mhfmusic.model.param;
 
-import top.wthfeng.model.PageParam;
+import top.wthfeng.mhfmusic.model.PageParam;
 
 /**查询歌曲入参
  * @Author : wangtonghe
  * @Date : 2016/1/21 21:45
  * @Email : wthfeng@126.com
  */
-public class SearchMusicParam extends PageParam{
+public class SearchMusicParam extends PageParam {
     private String musicName;
     private String singerName;
     private String album;

@@ -1,9 +1,9 @@
-package top.wthfeng.service;
+package top.wthfeng.mhfmusic.service;
 
-import top.wthfeng.model.PageUtil;
-import top.wthfeng.model.param.EditMusicParam;
-import top.wthfeng.model.param.SearchMusicParam;
-import top.wthfeng.model.view.ViewMusic;
+import top.wthfeng.mhfmusic.model.PageUtil;
+import top.wthfeng.mhfmusic.model.param.EditMusicParam;
+import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
+import top.wthfeng.mhfmusic.model.view.ViewMusic;
 
 import java.util.Map;
 

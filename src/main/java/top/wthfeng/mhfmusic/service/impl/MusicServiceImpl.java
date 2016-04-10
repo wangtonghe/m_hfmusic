@@ -1,14 +1,14 @@
-package top.wthfeng.service.impl;
+package top.wthfeng.mhfmusic.service.impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.wthfeng.dao.MusicDAO;
-import top.wthfeng.model.PageUtil;
-import top.wthfeng.model.param.EditMusicParam;
-import top.wthfeng.model.param.SearchMusicParam;
-import top.wthfeng.model.view.ViewMusic;
-import top.wthfeng.service.MusicService;
+import top.wthfeng.mhfmusic.dao.MusicDAO;
+import top.wthfeng.mhfmusic.model.PageUtil;
+import top.wthfeng.mhfmusic.model.param.EditMusicParam;
+import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
+import top.wthfeng.mhfmusic.model.view.ViewMusic;
+import top.wthfeng.mhfmusic.service.MusicService;
 
 import java.util.List;
 import java.util.Map;

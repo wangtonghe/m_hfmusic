@@ -1,9 +1,11 @@
-package top.wthfeng.intercepter;
+package top.wthfeng.mhfmusic.intercepter;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.wthfeng.model.SysUser;
-import top.wthfeng.util.StringUtil;
+import top.wthfeng.mhfmusic.model.SysUser;
+import top.wthfeng.mhfmusic.util.StringUtil;
+import top.wthfeng.mhfmusic.model.SysUser;
+import top.wthfeng.mhfmusic.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

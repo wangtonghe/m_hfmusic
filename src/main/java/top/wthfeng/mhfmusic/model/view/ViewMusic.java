@@ -1,4 +1,4 @@
-package top.wthfeng.model.view;
+package top.wthfeng.mhfmusic.model.view;
 
 /**
  * 歌曲查询出参
