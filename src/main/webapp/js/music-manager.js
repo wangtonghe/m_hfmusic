@@ -35,6 +35,10 @@ $(function(){
 
     });
 
+    $("#add-dialog #add_singer").on("click",function(){
+        $(this).siblings(".add_singer_div").show();
+    })
+
     //上下线
     $(".music-manager ").on("click","tr .flag",function(){
         if($(this).hasClass("online")){  //要下线
