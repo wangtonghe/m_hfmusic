@@ -4,9 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.service.SysUserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,15 +28,17 @@ public class SysUserController {
 
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> login(String username,String password){
+    public Map<String,Object> login(HttpServletRequest request,String username, String password){
         Map<String,Object> result = new HashMap<>();
-        String realName = sysUserService.login(username,password);
-        if(null==realName||realName.equals("")) {
+        SysUser  sysUser = sysUserService.login(username,password);
+        if(null==sysUser||sysUser.equals("")) {
             result.put("code", 1);
             result.put("data", "用户名或密码错误！");
         }else{
+            HttpSession session = request.getSession();
+            session.setAttribute("sysUser",sysUser);
             result.put("code",0);
-            result.put("data",realName);
+            result.put("data",sysUser);
         }
         return  result;
     }

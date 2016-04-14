@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.wthfeng.mhfmusic.dao.SysUserDAO;
 import top.wthfeng.mhfmusic.dao.SysUserDAO;
+import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.service.SysUserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserDAO sysUserDAO;
 
     @Override
-    public String login(String username, String password) {
+    public SysUser  login(String username, String password) {
         Map<String,Object> param = new HashMap<>();
         param.put("username",username);
         param.put("password",password);

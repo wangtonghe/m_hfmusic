@@ -1,5 +1,7 @@
 package top.wthfeng.mhfmusic.service;
 
+import top.wthfeng.mhfmusic.model.SysUser;
+
 /**
  * 系统用户Service
  * @Author : wangtonghe
@@ -13,5 +15,5 @@ public interface SysUserService {
      * @param password
      * @return
      */
-    public String login(String username,String password);
+     SysUser  login(String username,String password);
 }

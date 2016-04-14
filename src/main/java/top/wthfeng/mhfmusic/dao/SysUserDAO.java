@@ -1,5 +1,7 @@
 package top.wthfeng.mhfmusic.dao;
 
+import top.wthfeng.mhfmusic.model.SysUser;
+
 import java.util.Map;
 
 /**
@@ -14,6 +16,6 @@ public interface SysUserDAO {
      * @param param
      * @return
      */
-    String login(Map<String,Object> param);
+    SysUser login(Map<String,Object> param);
 }
 

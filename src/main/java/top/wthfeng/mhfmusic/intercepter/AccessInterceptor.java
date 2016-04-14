@@ -4,8 +4,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.util.StringUtil;
-import top.wthfeng.mhfmusic.model.SysUser;
-import top.wthfeng.mhfmusic.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +17,14 @@ import java.util.Map;
  * @Email : wthfeng@126.com
  */
 public class AccessInterceptor implements HandlerInterceptor {
+    /**
+     * 在请求进入controller之前验证
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @param o
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         SysUser sysUser =(SysUser) httpServletRequest.getSession().getAttribute("sysUser");

@@ -26,12 +26,32 @@ $(function(){
 
     });
 
-    //添加
+    //弹出添加歌曲对话框
     $(".music-manager button.addmusic").on("click",function(){
         $("#add-dialog").modal({
             backdrop: true,
             keyboard: false
         });
+
+    });
+
+    //添加歌曲保存
+    $("#add_music_save").on("click", function () {
+        var musicName=$("#add_musicname").val();
+
+    });
+
+    $("#add_lyric").fileinput(
+        {
+            uploadUrl:"http://wthfeng.top:8080/hfuploadserver/server/upload/file",
+            language:"zh",
+            allowedFileTypes:['image', 'html', 'text', 'video', 'audio', 'flash', 'object'],
+            showPreview:false
+
+        }
+    );
+    $('#add_lyric').on('fileuploaded', function(event, data, previewId, index) {
+        alert(data.response.data.fileUrl);
 
     });
 
@@ -68,7 +88,7 @@ $(function(){
         }
     });
 });
-
+//加载数据
 function initData(){
     var musicName = $("#mm_music").val();
     var singerName =$("#mm_signer").val();

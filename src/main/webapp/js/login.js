@@ -13,14 +13,10 @@ $(function() {
             dataType:'json',
             success: function (data) {
                 if(data.code==0){
-                    localStorage.setItem('mhf_accesstoken',data.data.accessToken);
-                    alert("登陆成功！");
-
+                    document.location = "index.shtml";
                 }else{
                     alert(data.data);
                 }
-
-
             }
         });
     });

@@ -5,7 +5,7 @@ package top.wthfeng.mhfmusic.model;
  */
 public class SysUser {
     private Integer id;
-    private String username;
+    private String userName;
     private String password;
     private String realName;
 
@@ -17,12 +17,12 @@ public class SysUser {
         this.realName = realName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

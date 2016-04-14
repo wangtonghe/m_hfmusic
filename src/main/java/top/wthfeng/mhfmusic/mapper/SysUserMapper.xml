@@ -3,7 +3,9 @@
 <mapper namespace="top.wthfeng.mhfmusic.dao.SysUserDAO" >
 
     <!--系统用户登录-->
-    <select id="login" parameterType="java.util.Map" resultType="java.lang.String">
-        SELECT a.realname from admin a WHERE a.username=#{username} and a.password=#{password}
+    <select id="login" parameterType="java.util.Map" resultType="top.wthfeng.mhfmusic.model.SysUser">
+      SELECT s.id, s.realname realName,s.loginname userName,s.password
+      from sysusers s where s.loginname=#{username} and s.password=#{password}
     </select>
+
 </mapper>

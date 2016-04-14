@@ -68,8 +68,10 @@
         <!--访问验证-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <!--屏蔽登陆请求-->
             <mvc:exclude-mapping path="/sysUser/login"/>
-            <mvc:exclude-mapping path="/music/*"/>
+            <!--屏蔽音乐管理请求，测试用-->
+            <mvc:exclude-mapping path="/music/**"/>
             <bean class="top.wthfeng.mhfmusic.intercepter.AccessInterceptor"/>
         </mvc:interceptor>
 
