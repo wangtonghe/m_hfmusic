@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybati.s.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.wthfeng.mhfmusic.dao.MusicDAO" >
 
     <!--按条件查询歌曲-->
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.SearchMusicParam"
     resultType="top.wthfeng.mhfmusic.model.view.ViewMusic">
-        SELECT m.id,m.album,m.cover,m.lyric,m.name as musicName,s.name as singerName,m.url as musicUrl,m.online
-        FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+        SELECT m.id,m.album,m.name as musicName, s.name as singerName,m.online,m.createTime,ss.realname as creator
+        FROM music m
+        LEFT JOIN singer s ON  m.singerId=s.id
+        LEFT JOIN sysusers ss on m.creatorId=ss.id
         WHERE 1=1
 
              <if test="musicName!=null and musicName!='' ">
@@ -21,30 +23,45 @@
                  <bind name="albumStr" value="'%'+album+'%'" />
                  and m.album LIKE #{albumStr}
              </if>
+            <if test="status!=null and  status==0 ">
+                and m.online=0
+            </if>
+            <if test="status!=null and  status==1">
+                and m.online=1
+            </if>
+        ORDER BY m.id DESC ,m.online DESC
+
         limit #{page},#{offSet}
     </select>
 
     <!--按条件查询歌曲所查询到的数目-->
     <select id="listNum" parameterType="top.wthfeng.mhfmusic.model.param.SearchMusicParam" resultType="java.lang.Integer">
-        SELECT COUNT(m.id) FROM music m  LEFT JOIN singer s ON  m.singerId=s.id
+        SELECT COUNT(m.id) FROM music m
+        LEFT JOIN singer s ON  m.singerId=s.id
       WHERE 1=1
-            <if test="musicName!=null and musicName!='' ">
-                <bind name="nameStr" value=" '%'+musicName+'%'" />
+        <if test="musicName!=null and musicName!='' ">
+              <bind name="nameStr" value=" '%'+musicName+'%'" />
                AND  m.name LIKE #{nameStr}
-            </if>
-            <if test="singerName!=null and singerName!='' ">
+        </if>
+        <if test="singerName!=null and singerName!='' ">
                 <bind name="singerNameStr" value="'%'+singerName+'%'" />
                 and s.name LIKE #{singerNameStr}
-            </if>
-            <if test="album!=null and album!='' ">
+        </if>
+        <if test="album!=null and album!='' ">
                 <bind name="albumStr" value="'%'+album+'%'" />
                 and m.album LIKE #{albumStr}
-            </if>
+        </if>
+        <if test="status!=null and status==0">
+            and m.online=0
+        </if>
+        <if test="status!=null and status==1">
+            and m.online=1
+        </if>
     </select>
 
     <insert id="add" parameterType="top.wthfeng.mhfmusic.model.param.EditMusicParam">
-        INSERT INTO music(`name`,singerId,lyric,url,album,cover,online)
-        VALUES (#{musicName},#{singerId},#{lyric},#{musicUrl},#{album},#{cover},#{online})
+        INSERT INTO music(`name`,singerId,lyric,url,album,cover,online,creatorId,createTime)
+        VALUES (#{musicName},#{singerId},#{lyric},#{musicUrl},#{album},#{cover},#{online},#{creatorId},#{createTime})
     </insert>
 
     <update id="edit" parameterType="top.wthfeng.mhfmusic.model.param.EditMusicParam">

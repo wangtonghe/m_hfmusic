@@ -11,9 +11,15 @@ public class ViewMusic {
     private String singerName;
     private String musicName;
     private String album;
-    private String cover;
-    private String musicUrl;
-    private String lyric;
+    /**
+     * 创建时间
+     */
+    private String createTime;
+    /**
+     * 创建人
+     */
+    private String creator;
+
     /**
      * 歌曲上下线，0为下线，1为上线
      */
@@ -52,28 +58,20 @@ public class ViewMusic {
         this.album = album;
     }
 
-    public String getCover() {
-        return cover;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
-    public String getMusicUrl() {
-        return musicUrl;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setMusicUrl(String musicUrl) {
-        this.musicUrl = musicUrl;
-    }
-
-    public String getLyric() {
-        return lyric;
-    }
-
-    public void setLyric(String lyric) {
-        this.lyric = lyric;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public Integer getOnline() {

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.wthfeng.mhfmusic.dao.MusicDAO;
 import top.wthfeng.mhfmusic.model.PageUtil;
+import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.model.param.EditMusicParam;
 import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewMusic;
@@ -42,6 +43,8 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public void add(EditMusicParam param) throws Exception{
+
+
         musicDAO.add(param);
 
     }

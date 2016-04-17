@@ -25,8 +25,8 @@
                 <td>歌曲名</td>
                 <td>歌手</td>
                 <td>所属专辑</td>
-                <td>封面图片</td>
-                <td>歌词路径</td>
+                <td>创建时间</td>
+                <td>创建人</td>
                 <td>操作</td>
             </tr>
             </thead>
@@ -58,9 +58,10 @@
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label for="e_music" class="col-sm-2  col-xs-offset-1 control-label">歌曲名</label>
+                            <label for="e_musicName" class="col-sm-2  col-xs-offset-1 control-label">歌曲名</label>
                             <div class="col-sm-6 ">
-                                <input type="text" class="form-control" id="e_music"/>
+                                <input type="text" class="form-control" id="e_musicName"/>
+                                <input type="hidden" id="e_musicId">
                             </div>
                         </div>
                         <div class="form-group">
@@ -70,15 +71,30 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="e_sepcial" class="col-sm-2  col-xs-offset-1 control-label">专辑</label>
+                            <label for="e_album" class="col-sm-2  col-xs-offset-1 control-label">专辑</label>
                             <div class="col-sm-6 ">
-                                <input type="text" class="form-control" id="e_sepcial"/>
+                                <input type="text" class="form-control" id="e_album"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="e_lyric" class="col-sm-2  col-xs-offset-1 control-label">歌词</label>
                             <div class="col-sm-6 ">
-                                <input type="file" id="e_lyric"/>
+                                <input type="file" id="e_lyric" class="form-control file-upload" />
+                                <input type="hidden" id="e_lyric_url">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="e_music" class="col-sm-2  col-xs-offset-1 control-label">歌曲</label>
+                            <div class="col-sm-6 ">
+                                <input type="file" id="e_music" class="form-control file-upload" />
+                                <input type="hidden" id="e_music_url">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="e_cover" class="col-sm-2  col-xs-offset-1 control-label">歌曲封面</label>
+                            <div class="col-sm-6 ">
+                                <input type="file" id="e_cover" class="form-control file-upload" />
+                                <input type="hidden" id="e_cover_url">
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,7 +116,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">添加</h4>
+                    <h4 class="modal-title">添加歌曲</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
@@ -113,25 +129,34 @@
                         <div class="form-group">
                             <label class="col-sm-2  col-xs-offset-1 control-label">歌手</label>
                             <div  class="col-sm-6 ">
-                                <input type="text" class="col-sm-2 form-control" placeholder="请输入歌手名">
+                                <input type="text" class="col-sm-2 form-control" id="add_singerId" placeholder="请输入歌手名">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_sepcial" class="col-sm-2  col-xs-offset-1 control-label">专辑</label>
+                            <label for="add_album" class="col-sm-2  col-xs-offset-1 control-label">专辑</label>
                             <div class="col-sm-6 ">
-                                <input type="text" class="form-control" id="add_sepcial"  placeholder="请输入专辑名"/>
+                                <input type="text" class="form-control" id="add_album"  placeholder="请输入专辑名"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="add_lyric" class="col-sm-2  col-xs-offset-1 control-label">歌词</label>
                             <div class="col-sm-6 ">
-                                <input type="file" class="form-control" id="add_lyric"/>
+                                <input type="file" class="form-control file-upload" id="add_lyric"/>
+                                <input type="hidden" id="add_lyric_url" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="add_lyric" class="col-sm-2  col-xs-offset-1 control-label">歌曲上传</label>
+                            <label for="add_lyric" class="col-sm-2  col-xs-offset-1 control-label">歌曲封面</label>
                             <div class="col-sm-6 ">
-                                <input type="file" class="form-control" id="add_music"/>
+                                <input type="file" class="form-control file-upload" id="add_cover"/>
+                                <input type="hidden" id="add_cover_url" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_music" class="col-sm-2  col-xs-offset-1 control-label">歌曲上传</label>
+                            <div class="col-sm-6 ">
+                                <input type="file"   class="form-control file-upload" id="add_music"/>
+                                <input type="hidden" id="add_music_url" >
                             </div>
                         </div>
                         <div class="form-group">

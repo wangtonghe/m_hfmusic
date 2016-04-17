@@ -11,6 +11,10 @@ public class SearchMusicParam extends PageParam {
     private String musicName;
     private String singerName;
     private String album;
+    /**
+     * 上线状态，离线为0，在线为1，全部为2
+     */
+    private Integer status;
 
 
     public String getSingerName() {
@@ -35,5 +39,13 @@ public class SearchMusicParam extends PageParam {
 
     public void setMusicName(String musicName) {
         this.musicName = musicName;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

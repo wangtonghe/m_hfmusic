@@ -1,5 +1,7 @@
 package top.wthfeng.mhfmusic.model.param;
 
+import java.util.Date;
+
 /**
  * 添加、编辑歌曲入参
  * @Author : wangtonghe
@@ -15,7 +17,14 @@ public class EditMusicParam {
     private Integer singerId;
     private String album;
     private boolean online;
-
+    /**
+     * 系统用户id
+     */
+    private Integer creatorId;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
     public Integer getId() {
         return id;
     }
@@ -78,5 +87,21 @@ public class EditMusicParam {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
