@@ -1,15 +1,44 @@
 /**
  * Created by wangtonghe on 2016/1/19.
  */
+var pageSize =6;
 $(function(){
-    initData(); //加载歌曲数据
+    initData(1,pageSize); //加载歌曲数据
+
+   /* $('#mm_online').on('shown.bs.dropdown', function (data) {
+        alert(data);
+
+
+    });*/
 
     /**
      * 搜索歌曲
      */
     $(".music-manager .searchmusic").on("click",function(){
-        initData();
+        initData(1,pageSize);
     });
+
+    $(".music-manager .pagination .page-num").on("click","a",function(data) {
+        var curpageli = $(this).siblings(".active");
+        var curpagenum = curpageli.children("a").text();
+        var targetpage = $(this).children("a").text();
+        if ($(this).hasClass("pre") && curpagenum > 1) {
+            initData(curpagenum - 1, pageSize);
+        } else if ($(this).hasClass("next")) {
+            initData(curpagenum + 1, pageSize);
+        } else {
+        if (curpagenum != targetpage) {
+            curpageli.removeClass("active");
+            $(this).addClass("active");
+            initData(targetpage, pageSize);
+        }
+      }
+
+
+
+    });
+
+
 
 
 
@@ -142,9 +171,13 @@ $(function(){
 
     //编辑
     $(".music-body").on("click","tr .edit",function () {
-        $("#e_musicId").val($(this).siblings(":input").val());
+        var a =$(this).siblings(" .mm_musicId").val();
+        var b=$(this).siblings(" .mm_singerId").val();
+        $("#e_musicId").val($(this).siblings(" .mm_musicId").val());
+        $("#e_singerId").val($(this).siblings(" .mm_singerId").val());
         $("#e_musicName").val($(this).closest("tr").find("td:eq(0)").text());
-        $("#add_singerId").val($(this).closest("tr").find("td:eq(1)").text());
+        $("#e_singer").val($(this).closest("tr").find("td:eq(1)").text());
+        $("#e_album").val($(this).closest("tr").find("td:eq(2)").text());
 
         $("#edit-dialog").modal({
             backdrop: true,
@@ -156,7 +189,7 @@ $(function(){
     $("#edit_music_save").on("click",function () {
         var id=$("#e_musicId").val();
         var musicName= $("#e_musicName").val();
-        var singerId=$("#e_singer").val();
+        var singerId=$("#e_singerId").val();
         var album = $("#e_album").val();
         var lyricUrl=$("#e_lyric_url").val();
         var musicUrl =$("#e_music_url").val();
@@ -179,24 +212,32 @@ $(function(){
 
 });
 //加载数据
-function initData(){
+function initData(pageNum,pageSize){
     var musicName = $("#mm_music").val();
     var singerName =$("#mm_signer").val();
     var album = $("#mm_album").val();
     $.ajax({
         "url":"admin/music/list",
-        "data":{musicName:musicName,singerName:singerName,album:album},
+        "data":{musicName:musicName,singerName:singerName,album:album,page:pageNum,num:pageSize},
         "dataType":"json",
         "type":"POST",
         "success":function(data){
             $(".music-body").empty();
             if(data.data.list.length>0){
-
+                var size =data.data.list.length;
+                var max =size/pageSize;
+                if(max>10) {
+                    $("#mm_pager").find("ul li:eq(7) a").text(max);
+                    $("#mm_pager").find("ul li:eq(6) a").text(max - 1);
+                    $("#mm_pager").find("ul li:eq(5) a").text(max - 2);
+                    $("#mm_pager").find("ul li:eq(4) a").text(max - 3);
+                }
                 for(var i=0;i<data.data.list.length;i++){
                     var columnData = $('<tr class="music-list"><td>'+data.data.list[i].musicName+'</td><td>'+
                         data.data.list[i].singerName+'</td><td>'+data.data.list[i].album+'</td><td>'+data.data.list[i].creator+
                         '</td><td>'+data.data.list[i].createTime+'</td><td>' +
-                        '<input type="hidden" value="'+data.data.list[i].id+'">'+
+                        '<input type="hidden" class="mm_musicId"  value="'+data.data.list[i].id+'">'+
+                        '<input type="hidden" class="mm_singerId" value="'+data.data.list[i].singerId+'">'+
                         '<button class="btn btn-mini btn-primary edit' + '">编辑</button> ' +
                         ' <button class="btn btn-mini btn-danger flag online">下线</button></td></tr>');
                     $(".music-body").append(columnData);
@@ -213,9 +254,5 @@ function initData(){
         }
 
     })
-
-}
-
-function clickedit(){
 
 }

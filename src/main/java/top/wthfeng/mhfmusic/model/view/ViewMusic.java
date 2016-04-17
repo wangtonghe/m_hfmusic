@@ -8,6 +8,10 @@ package top.wthfeng.mhfmusic.model.view;
  */
 public class ViewMusic {
     private Integer id;
+    /**
+     * 歌手id
+     */
+    private Integer singerId;
     private String singerName;
     private String musicName;
     private String album;
@@ -25,6 +29,13 @@ public class ViewMusic {
      */
     private Integer online;
 
+    public Integer getSingerId() {
+        return singerId;
+    }
+
+    public void setSingerId(Integer singerId) {
+        this.singerId = singerId;
+    }
 
     public Integer getId() {
         return id;

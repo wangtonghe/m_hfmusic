@@ -38,15 +38,11 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public void edit(EditMusicParam param) throws Exception{
         musicDAO.edit(param);
-
     }
 
     @Override
     public void add(EditMusicParam param) throws Exception{
-
-
         musicDAO.add(param);
-
     }
 
     @Override
