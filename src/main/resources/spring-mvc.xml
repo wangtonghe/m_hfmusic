@@ -13,21 +13,14 @@
     <!--  自动包扫描，将该包注解含有controller的作为控制器，与spring-mybatis的包扫描不同 -->
     <context:component-scan base-package="top.wthfeng.mhfmusic.controller"/>
 
+
     <!--配置字符串、json等转化器-->
     <mvc:annotation-driven/>
 
-    <!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
-        <property name="prefix" value="/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!-- 异常处理，返回json结果 -->
+    <bean id="exceptionResolver" class="top.wthfeng.mhfmusic.intercepter.ExceptionResolver"/>
 
     <mvc:interceptors>
-
-
         <!--访问验证-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -38,7 +31,6 @@
             <mvc:exclude-mapping path="/singer/**"/>
             <bean class="top.wthfeng.mhfmusic.intercepter.AccessInterceptor"/>
         </mvc:interceptor>
-
-
+        
     </mvc:interceptors>
 </beans>
