@@ -2,6 +2,7 @@
  * Created by wangtonghe on 2016/1/19.
  */
 var pageSize =6;
+var rootUrl="http://wthfeng.top:8080/hfuploadserver/server/upload/file";
 $(function(){
     initData(1,pageSize); //加载歌曲数据
 
@@ -62,7 +63,7 @@ $(function(){
     //歌词文件上传
     $(".file-upload").fileinput(
         {
-            uploadUrl:"http://wthfeng.top:8080/hfuploadserver/server/upload/file",
+            uploadUrl:rootUrl,
             language:"zh",
             allowedFileExtensions:['jpg',  'png', 'lrc','mp3','mp4'],
             showPreview:false,

@@ -31,7 +31,7 @@
             <!--#include virtual="web/music-manager.html" -->
             <!--#include virtual="web/form-manager.html" -->
             <!--#include virtual="web/music-recommend.html" -->
-            <!--#include virtual="web/music-collect.html" -->
+            <!--#include virtual="web/special-manager.html" -->
         </div>
     </div>
 

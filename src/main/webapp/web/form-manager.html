@@ -1,8 +1,31 @@
-
-
 <div class="form-manager">
     <h1 class="page-header">歌单管理</h1>
+    <form class="form-inline outmargin">
+        <div class="form-group">
+            <input type="text" class="form-control" id="fm_formname" placeholder="请输入歌单名">
+        </div>
+        <div class="form-group ">
+            <input type="date" class="form-control" id="fm_createtime">
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-info searchform">搜索</button>
+        </div>
+    </form>
     <div class="row placeholders">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <td>歌单名</td>
+                <td>创建人</td>
+                <td>描述</td>
+                <td>创建时间</td>
+                <td>是否为系统歌单</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody class="mform-body">
+            </tbody>
+        </table>
     </div>
 </div>
 
