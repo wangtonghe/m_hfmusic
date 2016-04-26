@@ -90,7 +90,25 @@
     </dependency>
 </dependencies>
 
+  <profiles>
 
+    <profile>
+      <id>local</id>
+      <properties>
+        <profiles.active>local</profiles.active>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+
+    <profile>
+      <id>remote</id>
+      <properties>
+        <profiles.active>remote</profiles.active>
+      </properties>
+    </profile>
+  </profiles>
 
   <build>
     <finalName>m_hfmusic</finalName>
@@ -104,6 +122,13 @@
       </resource>
       <resource>
         <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>local/**</exclude>
+          <exclude>remote/**</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources/${profiles.active}</directory>
       </resource>
     </resources>
     <plugins>

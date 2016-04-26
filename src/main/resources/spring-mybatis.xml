@@ -9,14 +9,14 @@
   http://www.springframework.org/schema/context/spring-context-3.1.xsd
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
     <!-- 自动扫描 -->
-    <context:component-scan base-package="top.wthfeng" />
+    <context:component-scan base-package="top.wthfeng.mhfmusic" />
     <context:annotation-config />
 
     <!--   加载数据库连接的properties配置文件 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath*:jdbc.properties</value>
+                <value>classpath*:**/jdbc.properties</value>
             </list>
         </property>
     </bean>
