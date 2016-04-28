@@ -6,11 +6,25 @@ var rootUrl="http://wthfeng.top:8080/hfuploadserver/server/upload/file";
 $(function(){
     initData(1,pageSize); //加载歌曲数据
 
-   /* $('#mm_online').on('shown.bs.dropdown', function (data) {
-        alert(data);
+    var singers = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('singerName'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote:{
+            url:'admin/music/getMatchSinger?singerName=%QUERY',
+            wildcard: '%QUERY'
 
+        }
+    });
+    singers.initialize();
 
-    });*/
+    $(".music-manager .typeahead").typeahead({
+            highlight:true
+        }
+       ,{
+        name: 'singers',
+        display: 'singerName',
+        source: singers.ttAdapter()
+    });
 
     /**
      * 搜索歌曲

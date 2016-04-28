@@ -45,4 +45,6 @@ public interface MusicDAO {
      */
     void online(Map<String,Object> param);
 
+
+
 }

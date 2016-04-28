@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.wthfeng.mhfmusic.dao.SingerDAO" >
+
+    <!--获取匹配的歌手id和姓名-->
+    <select id="getMatchSinger" parameterType="java.lang.String" resultType="top.wthfeng.mhfmusic.model.view.ViewSingerName">
+        SELECT s.id singerId,s.name singerName from singer s
+        where 1=1
+        <if test="singerName!=null">
+           <bind name="nameLikeStr" value="'%'+singerName+'%'"/>
+            and  s.`name`   like #{nameLikeStr}
+        </if>
+    </select>
+
+</mapper>
