@@ -7,7 +7,9 @@
         <id property="id" column="id" />
         <result property="name" column="name"/>
         <result property="cover" column="cover"/>
-        <result property="label" column="label"/>
+        <collection property="label" ofType="java.lang.String">
+          <result column="label" />
+        </collection>
         <collection property="musicList" ofType="top.wthfeng.mhfmusic.model.form.Music4Form">
             <id property="seq" column="seq"/>
             <result property="musicId" column="musicId"/>

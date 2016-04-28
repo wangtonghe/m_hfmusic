@@ -12,18 +12,25 @@ $(function(){
         remote:{
             url:'admin/music/getMatchSinger?singerName=%QUERY',
             wildcard: '%QUERY'
-
         }
     });
     singers.initialize();
 
+    //自动补全插件初始化
     $(".music-manager .typeahead").typeahead({
-            highlight:true
+            highlight:true,
+            hint:false
         }
-       ,{
-        name: 'singers',
-        display: 'singerName',
-        source: singers.ttAdapter()
+        ,{
+            name: 'singers',
+            display: 'singerName',
+            limit:8,
+            source: singers  //数据源
+    });
+
+    //自动补全插件选择后回调函数
+    $('.music-manager .typeahead').bind('typeahead:select', function(ev, suggestion) {
+       $(".music-manager #add_singerId").val(suggestion.singerId);
     });
 
     /**
@@ -48,22 +55,14 @@ $(function(){
             initData(targetpage, pageSize);
         }
       }
-
-
-
     });
-
-
-
-
-
-
 
     //弹出添加歌曲对话框
     $(".music-manager button.addmusic").on("click",function(){
+        $("#add-dialog .form-control").val('');
         $("#add-dialog").modal({
             backdrop: true,
-            keyboard: false
+            keyboard: true
         });
 
     });

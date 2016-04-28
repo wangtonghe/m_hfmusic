@@ -14,7 +14,7 @@ public class ViewFormDetails {
     private int id;
     private String name;
     private String cover;
-    private String []label;
+    private List<String> label;
     private List<Music4Form> musicList;
 
     public int getId() {
@@ -41,11 +41,11 @@ public class ViewFormDetails {
         this.cover = cover;
     }
 
-    public String[] getLabel() {
+    public List<String> getLabel() {
         return label;
     }
 
-    public void setLabel(String[] label) {
+    public void setLabel(List<String> label) {
         this.label = label;
     }
 
