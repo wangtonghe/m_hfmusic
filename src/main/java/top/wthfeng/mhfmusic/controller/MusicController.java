@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.model.param.EditMusicParam;
 import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
+import top.wthfeng.mhfmusic.model.view.ViewSingerName;
 import top.wthfeng.mhfmusic.service.MusicService;
+import top.wthfeng.mhfmusic.service.SingerService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +32,8 @@ public class MusicController {
 
     @Resource
     private MusicService musicService;
+    @Resource
+    private SingerService singerService;
 
 
 
@@ -99,8 +104,18 @@ public class MusicController {
         result.put("code",0);
         result.put("data",null);
         return result;
+    }
+
+    @RequestMapping(value = "/getMatchSinger",method = RequestMethod.GET)
+    @ResponseBody
+    public List<ViewSingerName> getMatchSinger(String  singerName)throws  Exception{
+
+        List<ViewSingerName> list = singerService.getMatchSinger(singerName);
+       return list;
 
     }
+
+
 
 
 }

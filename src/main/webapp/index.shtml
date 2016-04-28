@@ -43,6 +43,7 @@
 <script src="js/fileinput.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/fileinput_locale_zh.js"></script>
+<script src="js/typeahead.bundle.js"></script>
 <script src="js/index.js"></script>
 <script src="js/music-manager.js"></script>
 </body>
