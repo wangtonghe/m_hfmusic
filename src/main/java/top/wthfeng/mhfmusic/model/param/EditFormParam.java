@@ -1,5 +1,7 @@
 package top.wthfeng.mhfmusic.model.param;
 
+import java.util.Date;
+
 /**
  * 编辑、添加歌单入参
  * @author wangtonghe
@@ -12,10 +14,30 @@ public class EditFormParam {
     private String cover;
     private String[] labels;
     private String info;
+    private Date createTime;
+    private Integer userId;
     /**
      * 歌曲id集合
      */
     private int []musicIds;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+
 
     public int getId() {
         return id;

@@ -15,10 +15,7 @@ public class ViewFormList {
      * 创建人
      */
     private String creator;
-    /**
-     * 喜欢人数
-     */
-    private int likeNum;
+
     /**
      * 收藏数
      */
@@ -63,14 +60,6 @@ public class ViewFormList {
 
     public void setCreator(String creator) {
         this.creator = creator;
-    }
-
-    public int getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(int likeNum) {
-        this.likeNum = likeNum;
     }
 
     public int getCollectNum() {

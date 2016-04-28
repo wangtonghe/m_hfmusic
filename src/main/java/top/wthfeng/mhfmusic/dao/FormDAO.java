@@ -6,6 +6,7 @@ import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 歌单 DAO
@@ -23,10 +24,9 @@ public interface FormDAO {
 
     /**
      * 歌单上下线
-     * @param formId
-     * @param flag
+     * @param param
      */
-    void online(int formId,int flag);
+    void online(Map<String,Integer> param);
 
     /**
      * 获取歌单详情
@@ -36,15 +36,39 @@ public interface FormDAO {
     ViewFormDetails details(int formId);
 
     /**
-     * 编辑歌单
+     * 编辑歌单(歌单部分)
      * @param param
      */
-    void edit(EditFormParam param);
+    void editForm(EditFormParam param);
 
     /**
-     * 添加歌单
+     * 删除某歌单的所有歌曲
+     * @param formId
+     */
+    void delFormMusic(Integer formId);
+
+    /**
+     * 添加歌单（歌单部分）
      * @param param
      */
-    void add(EditFormParam param);
+    void addForm(EditFormParam param);
+
+    /**
+     * 添加歌单（歌曲部分）
+     * @param param
+     */
+    void addFormMusic(EditFormParam param);
+
+    /**
+     * 删除歌单标签
+     * @param formId
+     */
+    void delFormLabel(Integer formId);
+
+    /**
+     * 添加歌单标签
+     * @param param
+     */
+    void addFormLabel(EditFormParam param);
 
 }

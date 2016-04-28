@@ -2,4 +2,97 @@
 <!DOCTYPE mapper PUBLIC "-//mybati.s.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.wthfeng.mhfmusic.dao.FormDAO" >
 
+
+    <resultMap id="detailsMap" type="top.wthfeng.mhfmusic.model.view.ViewFormDetails">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="cover" column="cover"/>
+        <result property="label" column="label"/>
+        <collection property="musicList" ofType="top.wthfeng.mhfmusic.model.form.Music4Form">
+            <id property="seq" column="seq"/>
+            <result property="musicId" column="musicId"/>
+            <result property="album" column="album"/>
+            <result property="musicName" column="musicName"/>
+            <result property="singerName" column="singerName"/>
+        </collection>
+    </resultMap>
+
+    <!--获取系统歌单列表-->
+    <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
+            resultType="top.wthfeng.mhfmusic.model.view.ViewFormList">
+        select f.id,f.formName `name`,f.userId,f.online,
+          fl.labelName label, u.nickName creator,
+        ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
+         from form f
+        left join form_label fl on f.id=fl.formId
+        LEFT join `user` u on f.userId=u.id
+        where f.issystem=1
+        <if test="name!=null and name!=''">
+            and   f.formName =#{name}
+        </if>
+        <if test="label!=null and label!=''">
+            and  sl.labelName=#{label}
+        </if>
+    </select>
+
+    <!--设置上下线-->
+   <update id="online" parameterType="java.util.Map">
+       UPDATE form f set f.online=#{flag}
+       where f.id=#{formId}
+   </update>
+
+    <!--获取歌单详情-->
+    <select id="details" parameterType="java.lang.Integer"
+    resultMap="detailsMap">
+        select f.id,f.formName `name`,f.cover,fl.labelName label,
+         fd.id as seq,m.id as musicId,
+         m.album,m.name as musicName,s.name as singerName
+        from form f
+        left JOIN form_details fd on f.id=fd.formId
+        left join music m on fd.musicId=m.id
+        left join singer s on m.singerId=s.id
+        left join form_label fl on f.id=fl.formId
+        where f.id=#{formId}
+    </select>
+
+    <!--编辑歌单（歌单表部分）-->
+    <update id="editForm" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
+        UPDATE form set formName=#{name},cover=#{cover},info=#{info}
+        where id=#{id}
+    </update>
+
+    <delete id="delFormMusic" parameterType="java.lang.Integer">
+       DELETE from form_details where id=#{formId}
+    </delete>
+
+    <!--添加歌单（歌单表部分）-->
+    <insert id="addForm" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
+        <selectKey keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into form(userId,formName,info,createTime,cover,issystem)
+        values (#{userId},#{name},#{info},#{createTime},#{cover},1)
+    </insert>
+
+    <!--添加歌单歌曲部分-->
+    <insert id="addFormMusic" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
+        insert into form_details(formId,musicId) VALUES
+        <foreach collection="musicIds" item="item" separator=",">
+            (#{id},#{item})
+        </foreach>
+    </insert>
+
+    <delete id="delFormLabel" parameterType="java.lang.Integer">
+        DELETE from form_label where formId=#{formId}
+    </delete>
+
+    <insert id="addFormLabel" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
+        insert into form_label(formId,labelName) VALUES
+        <foreach collection="labels" item="item" separator=",">
+            (#{id},#{item})
+        </foreach>
+    </insert>
+
+
+
 </mapper>
