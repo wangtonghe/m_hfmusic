@@ -1,5 +1,7 @@
 package top.wthfeng.mhfmusic.model.view;
 
+import java.util.List;
+
 /**
  * 歌单列表出参
  * @author wangtonghe
@@ -10,7 +12,7 @@ public class ViewFormList {
     private int id;
     private String name;
     private String cover;
-    private String []label;
+    private List<String> label;
     /**
      * 创建人
      */
@@ -46,11 +48,11 @@ public class ViewFormList {
         this.cover = cover;
     }
 
-    public String[] getLabel() {
+    public List<String> getLabel() {
         return label;
     }
 
-    public void setLabel(String[] label) {
+    public void setLabel(List<String> label) {
         this.label = label;
     }
 

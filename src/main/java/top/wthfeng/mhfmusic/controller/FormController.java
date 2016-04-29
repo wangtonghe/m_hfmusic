@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
+import top.wthfeng.mhfmusic.model.view.ViewError;
 import top.wthfeng.mhfmusic.service.FormService;
 
 import javax.annotation.Resource;
@@ -77,6 +78,11 @@ public class FormController {
     @ResponseBody
     public Map<String,Object> edit(EditFormParam param,String musicIds){
         Map<String,Object> result = new HashMap<>();
+        if(param.getId()<=0){
+            result.put("code",1);
+            result.put("data",new ViewError("id字段非法！"));
+            return result;
+        }
         param.setMusicIds(str2Array(musicIds));
         formService.edit(param);
         result.put("code",0);

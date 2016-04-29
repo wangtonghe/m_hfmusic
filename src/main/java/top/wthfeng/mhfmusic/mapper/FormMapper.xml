@@ -2,7 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybati.s.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.wthfeng.mhfmusic.dao.FormDAO" >
 
-
+    <!--歌单列表-->
+    <resultMap id="listMap" type="top.wthfeng.mhfmusic.model.view.ViewFormList">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="cover" property="cover"/>
+        <result column="creator" property="creator"/>
+        <result column="online" property="online"/>
+        <result column="collectNum" property="collectNum"/>
+        <collection property="label" ofType="java.lang.String">
+            <result column="label" />
+        </collection>
+    </resultMap>
+    <!--歌单详情-->
     <resultMap id="detailsMap" type="top.wthfeng.mhfmusic.model.view.ViewFormDetails">
         <id property="id" column="id" />
         <result property="name" column="name"/>
@@ -21,9 +33,9 @@
 
     <!--获取系统歌单列表-->
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
-            resultType="top.wthfeng.mhfmusic.model.view.ViewFormList">
-        select f.id,f.formName `name`,f.userId,f.online,
-          fl.labelName label, u.nickName creator,
+            resultMap="listMap">
+        select f.id,f.formName `name`,f.userId,f.online,f.cover,
+          fl.labelName label, u.username creator,
         ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
          from form f
         left join form_label fl on f.id=fl.formId
