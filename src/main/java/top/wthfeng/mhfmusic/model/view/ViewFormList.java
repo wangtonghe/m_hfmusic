@@ -1,5 +1,6 @@
 package top.wthfeng.mhfmusic.model.view;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +18,11 @@ public class ViewFormList {
      * 创建人
      */
     private String creator;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
     /**
      * 收藏数
@@ -78,5 +84,13 @@ public class ViewFormList {
 
     public void setOnline(int online) {
         this.online = online;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

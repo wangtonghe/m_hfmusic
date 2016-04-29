@@ -35,7 +35,7 @@
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
             resultMap="listMap">
         select f.id,f.formName `name`,f.userId,f.online,f.cover,
-          fl.labelName label, u.username creator,
+          fl.labelName label, u.username creator,f.createTime,
         ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
          from form f
         left join form_label fl on f.id=fl.formId
@@ -76,12 +76,12 @@
     </update>
 
     <delete id="delFormMusic" parameterType="java.lang.Integer">
-       DELETE from form_details where id=#{formId}
+       DELETE from form_details where formId=#{formId}
     </delete>
 
     <!--添加歌单（歌单表部分）-->
     <insert id="addForm" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
-        <selectKey keyProperty="id" order="AFTER">
+        <selectKey keyProperty="id" keyColumn="id" resultType="java.lang.Integer" order="AFTER">
             select LAST_INSERT_ID()
         </selectKey>
         insert into form(userId,formName,info,createTime,cover,issystem)
@@ -91,21 +91,24 @@
     <!--添加歌单歌曲部分-->
     <insert id="addFormMusic" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
         insert into form_details(formId,musicId) VALUES
-        <foreach collection="musicIds" item="item" separator=",">
+        <foreach collection="arrMusicIds" item="item" separator=",">
             (#{id},#{item})
         </foreach>
     </insert>
 
+    <!--删除歌单标签-->
     <delete id="delFormLabel" parameterType="java.lang.Integer">
         DELETE from form_label where formId=#{formId}
     </delete>
 
+    <!--添加歌单标签-->
     <insert id="addFormLabel" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
         insert into form_label(formId,labelName) VALUES
-        <foreach collection="labels" item="item" separator=",">
+        <foreach collection="arrLabels" item="item" separator=",">
             (#{id},#{item})
         </foreach>
     </insert>
+
 
 
 

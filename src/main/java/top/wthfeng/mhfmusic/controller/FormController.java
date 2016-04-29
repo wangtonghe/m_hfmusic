@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
 import top.wthfeng.mhfmusic.model.view.ViewError;
 import top.wthfeng.mhfmusic.service.FormService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,14 +78,19 @@ public class FormController {
      */
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> edit(EditFormParam param,String musicIds){
+    public Map<String,Object> edit(EditFormParam param,String musicIds,String labels){
         Map<String,Object> result = new HashMap<>();
         if(param.getId()<=0){
             result.put("code",1);
             result.put("data",new ViewError("id字段非法！"));
             return result;
         }
-        param.setMusicIds(str2Array(musicIds));
+        if(musicIds!=null){
+            param.setArrMusicIds(str2Array(musicIds));
+        }
+        if(labels!=null){
+            param.setArrLabels(labels.split(","));
+        }
         formService.edit(param);
         result.put("code",0);
         result.put("data",null);
@@ -97,9 +104,27 @@ public class FormController {
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> add(EditFormParam param,String musicIds){
+    public Map<String,Object> add(EditFormParam param,String musicIds,String labels, HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
-        param.setMusicIds(str2Array(musicIds));
+        if(param.getName()==null){
+            result.put("code",1);
+            result.put("data",new ViewError("name为必填字段"));
+            return result;
+        }
+        if(param.getCover()==null){
+            result.put("code",1);
+            result.put("data",new ViewError("cover为必填字段"));
+            return result;
+        }
+        if(param.getInfo()==null){
+            result.put("code",1);
+            result.put("data",new ViewError("info为必填字段"));
+            return result;
+        }
+        Integer  sysUserId = ((SysUser) request.getSession().getAttribute("sysUser")).getId();
+        param.setUserId(sysUserId);
+        param.setArrMusicIds(str2Array(musicIds));
+        param.setArrLabels(labels.split(","));
         formService.add(param);
         result.put("code",0);
         result.put("data",null);

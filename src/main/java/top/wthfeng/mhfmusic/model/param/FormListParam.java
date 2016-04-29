@@ -26,10 +26,7 @@ public class FormListParam {
      * 标签
      */
     private String label;
-    /**
-     * 创建时间(0为全部，1为一天内，2为1周内，3为一月内，4为一月外)
-     */
-    private int createTime;
+
 
     public int getPage() {
         if(page<=1){
@@ -67,14 +64,6 @@ public class FormListParam {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public int getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(int createTime) {
-        this.createTime = createTime;
     }
 
     public int getOffset() {

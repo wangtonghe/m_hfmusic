@@ -46,20 +46,31 @@ public class FormServiceImpl implements FormService {
     @Override
     public void edit(EditFormParam param) {
         formDAO.editForm(param);
-        formDAO.delFormMusic(param.getId());
-        formDAO.addFormMusic(param);
-        formDAO.delFormLabel(param.getId());
-        formDAO.addFormLabel(param);
+        if(param.getArrMusicIds()!=null){ //非空则重新添加，为空表示无变化
+            formDAO.delFormMusic(param.getId());
+            formDAO.addFormMusic(param);
+        }
+        if(param.getArrLabels()!=null){
+            formDAO.delFormLabel(param.getId());
+            formDAO.addFormLabel(param);
+        }
+
+
 
     }
 
     @Override
     public void add(EditFormParam param) {
         formDAO.addForm(param);
-        formDAO.delFormMusic(param.getId());
-        formDAO.addFormMusic(param);
-        formDAO.delFormLabel(param.getId());
-        formDAO.addFormLabel(param);
+        if(param.getArrMusicIds()!=null){  //非空则重新添加，为空表示无变化
+            formDAO.delFormMusic(param.getId());
+            formDAO.addFormMusic(param);
+        }
+        if(param.getArrLabels()!=null){
+            formDAO.delFormLabel(param.getId());
+            formDAO.addFormLabel(param);
+        }
+
 
     }
 }

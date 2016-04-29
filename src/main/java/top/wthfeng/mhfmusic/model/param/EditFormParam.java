@@ -12,14 +12,14 @@ public class EditFormParam {
     private int id;
     private String name;
     private String cover;
-    private String[] labels;
+    private String[] arrLabels;
     private String info;
     private Date createTime;
     private Integer userId;
     /**
      * 歌曲id集合
      */
-    private int []musicIds;
+    private int []arrMusicIds;
 
     public Date getCreateTime() {
         return createTime;
@@ -63,13 +63,7 @@ public class EditFormParam {
         this.cover = cover;
     }
 
-    public String[] getLabels() {
-        return labels;
-    }
 
-    public void setLabels(String[] labels) {
-        this.labels = labels;
-    }
 
     public String getInfo() {
         return info;
@@ -79,11 +73,19 @@ public class EditFormParam {
         this.info = info;
     }
 
-    public int[] getMusicIds() {
-        return musicIds;
+    public String[] getArrLabels() {
+        return arrLabels;
     }
 
-    public void setMusicIds(int[] musicIds) {
-        this.musicIds = musicIds;
+    public void setArrLabels(String[] arrLabels) {
+        this.arrLabels = arrLabels;
+    }
+
+    public int[] getArrMusicIds() {
+        return arrMusicIds;
+    }
+
+    public void setArrMusicIds(int[] arrMusicIds) {
+        this.arrMusicIds = arrMusicIds;
     }
 }

@@ -14,7 +14,6 @@ import top.wthfeng.mhfmusic.service.SingerService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +61,6 @@ public class MusicController {
     @ResponseBody
     public Map<String,Object> add(EditMusicParam param, HttpServletRequest request)throws Exception{
         Map<String,Object> result = new HashMap<>();
-        HttpSession session = request.getSession();
         Integer  sysUserId = ((SysUser) request.getSession().getAttribute("sysUser")).getId();
         param.setCreatorId(sysUserId);
         param.setCreateTime(new Date());
