@@ -4,15 +4,17 @@
  */
 $(function(){
 
-    $(".sidebar .nav-sidebar li a").eq(0).addClass("active");
+    $(".sidebar .nav-sidebar li").eq(0).find("a").addClass("active");
 
     //初始化页面
-    $(".sidebar .nav-sidebar li a ").each(function () {
-        if($(this).hasClass("active")){
-            var choice=$(this).parent().attr("class");
+    $(".sidebar .nav-sidebar li").each(function () {
+        if($(this).find("a").hasClass("active")){
+            var choice=$(this).attr("class");
             $(".container-fluid .main > div").each(function(){
                 if($(this).hasClass(choice)){
                     $(this).show().siblings().hide();
+                    $.getScript("js/"+choice+".js",function(){
+                    });
                 }
             })
         }
@@ -20,12 +22,14 @@ $(function(){
 
 
     //单击左侧菜单，显示对应页面
-    $(".sidebar .nav-sidebar li a ").on('click',function(){
+    $(".sidebar .nav-sidebar li").on('click',"a",function(){
         $(this).addClass("active").siblings().removeClass("active");
         var choice=$(this).parent().attr("class");
         $(".container-fluid .main > div").each(function(){
             if($(this).hasClass(choice)){
                 $(this).show().siblings().hide();
+                //$("script[src='js/*-manager.js']").remove();
+                $.getScript("js/"+choice+".js",function(){});
             }
         })
 

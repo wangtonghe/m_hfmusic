@@ -1,10 +1,9 @@
 /**
  * Created by wangtonghe on 2016/1/19.
  */
-var pageSize =6;
-var rootUrl="http://wthfeng.top:8080/hfuploadserver/server/upload/file";
+
 $(function(){
-    initData(1,pageSize); //加载歌曲数据
+    initMusic(1,pageSize); //加载歌曲数据
 
     var singers = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('singerName'),
@@ -37,26 +36,8 @@ $(function(){
      * 搜索歌曲
      */
     $(".music-manager .searchmusic").on("click",function(){
-        initData(1,pageSize);
+        initMusic(1,pageSize);
     });
-
-    $(".music-manager .pagination .page-num").on("click","a",function(data) {
-        var curpageli = $(this).siblings(".active");
-        var curpagenum = curpageli.children("a").text();
-        var targetpage = $(this).children("a").text();
-        if ($(this).hasClass("pre") && curpagenum > 1) {
-            initData(curpagenum - 1, pageSize);
-        } else if ($(this).hasClass("next")) {
-            initData(curpagenum + 1, pageSize);
-        } else {
-        if (curpagenum != targetpage) {
-            curpageli.removeClass("active");
-            $(this).addClass("active");
-            initData(targetpage, pageSize);
-        }
-      }
-    });
-
     //弹出添加歌曲对话框
     $(".music-manager button.addmusic").on("click",function(){
         $("#add-dialog .form-control").val('');
@@ -64,25 +45,13 @@ $(function(){
             backdrop: true,
             keyboard: true
         });
-
     });
-
     //添加歌曲保存
     $("#add_music_save").on("click", function () {
         var musicName=$("#add_musicname").val();
 
     });
 
-    //歌词文件上传
-    $(".file-upload").fileinput(
-        {
-            uploadUrl:rootUrl,
-            language:"zh",
-            allowedFileExtensions:['jpg',  'png', 'lrc','mp3','mp4'],
-            showPreview:false,
-            showRemove:false
-        }
-    );
     //添加歌词文件上传成功的回调函数
     $('#add_lyric').on('fileuploaded', function(event, data, previewId, index) {
         var result =data.response;
@@ -107,7 +76,6 @@ $(function(){
 
         }else alert(result.data.error);
     });
-
 
     //编辑歌词文件上传成功的回调函数
     $('#e_lyric').on('fileuploaded', function(event, data, previewId, index) {
@@ -145,7 +113,7 @@ $(function(){
         $.post("admin/music/add",{musicName:musicName,musicUrl:musicUrl,singerId:singerId,album:album,lyric:lyricUrl,cover:cover},function(data){
             if(data.code==0){
                 $("#add-dialog").modal("hide");
-                initData();
+                initMusic();
             }
             else{
                 alert("添加歌曲失败！");
@@ -163,7 +131,7 @@ $(function(){
             var id =$(this).siblings(":input").val();
             $.post("admin/music/online",{flag:0,id:id},function(data){
                 if(data.code==0){
-                    initData();
+                    initMusic();
                 }
                 else{
                     alert("更新失败！");
@@ -174,7 +142,7 @@ $(function(){
             var id =$(this).siblings(":input").val();
             $.post("admin/music/online",{flag:1,id:id},function(data){
                 if(data.code==0){
-                    initData();
+                    initMusic();
                 }
                 else{
                     alert("更新失败！");
@@ -211,62 +179,67 @@ $(function(){
         $.post("admin/music/edit",{id:id,musicName:musicName,musicUrl:musicUrl,singerId:singerId,album:album,lyric:lyricUrl,cover:cover},function(data){
             if(data.code==0){
                 $("#edit-dialog").modal("hide");
-                initData();
+                initMusic();
             }
             else{
                 alert("编辑歌曲失败！");
             }
         },"json");
-
-
-
-
     });
-
-
 });
-//加载数据
-function initData(pageNum,pageSize){
+
+
+//加载歌曲
+function initMusic(pageNum, pageSize) {
     var musicName = $("#mm_music").val();
-    var singerName =$("#mm_signer").val();
+    var singerName = $("#mm_signer").val();
     var album = $("#mm_album").val();
+    var status =$("#mm_status").find("option:selected").val();
     $.ajax({
-        "url":"admin/music/list",
-        "data":{musicName:musicName,singerName:singerName,album:album,page:pageNum,num:pageSize},
-        "dataType":"json",
-        "type":"POST",
-        "success":function(data){
+        "url": "admin/music/list",
+        "data": {musicName: musicName, singerName: singerName, album: album,status:status, pageNum: pageNum, pageSize: pageSize},
+        "dataType": "json",
+        "type": "GET",
+        "success": function (data) {
             $(".music-body").empty();
-            if(data.data.list.length>0){
-                var size =data.data.list.length;
-                var max =size/pageSize;
-                if(max>10) {
-                    $("#mm_pager").find("ul li:eq(7) a").text(max);
-                    $("#mm_pager").find("ul li:eq(6) a").text(max - 1);
-                    $("#mm_pager").find("ul li:eq(5) a").text(max - 2);
-                    $("#mm_pager").find("ul li:eq(4) a").text(max - 3);
-                }
-                for(var i=0;i<data.data.list.length;i++){
-                    var columnData = $('<tr class="music-list"><td>'+data.data.list[i].musicName+'</td><td>'+
-                        data.data.list[i].singerName+'</td><td>'+data.data.list[i].album+'</td><td>'+data.data.list[i].creator+
-                        '</td><td>'+data.data.list[i].createTime+'</td><td>' +
-                        '<input type="hidden" class="mm_musicId"  value="'+data.data.list[i].id+'">'+
-                        '<input type="hidden" class="mm_singerId" value="'+data.data.list[i].singerId+'">'+
-                        '<button class="btn btn-mini btn-primary edit' + '">编辑</button> ' +
-                        ' <button class="btn btn-mini btn-danger flag online">下线</button></td></tr>');
+            if (data.data.list.length > 0) {
+                var size = data.data.list.length;
+                for (var i = 0; i < data.data.list.length; i++) {
+                    var columnData = $('<tr class="music-list"><td>' + data.data.list[i].musicName + '</td><td>' +
+                        data.data.list[i].singerName + '</td><td>' + data.data.list[i].album + '</td><td>' + data.data.list[i].creator +
+                        '</td><td>' + data.data.list[i].createTime + '</td><td>' +
+                        '<input type="hidden" class="mm_musicId"  value="' + data.data.list[i].id + '">' +
+                        '<input type="hidden" class="mm_singerId" value="' + data.data.list[i].singerId + '">' +
+                        '<button class="btn btn-sm btn-primary edit' + '">编辑</button> ' +
+                        ' <button class="btn btn-sm btn-danger flag online">下线</button></td></tr>');
                     $(".music-body").append(columnData);
-                    if(data.data.list[i].online==0){
-                        var a = $(".music-body tr:eq("+i+")  .online").removeClass("btn-danger online")
+                    if (data.data.list[i].online == 0) {
+                        var a = $(".music-body tr:eq(" + i + ")  .online").removeClass("btn-danger online")
                             .addClass("btn-success offline").text("上线");
                     }
 
                 }
             }
+            var total =data.data.totlePageNum;
+            if (total> 1) {
+                $('#mm-pager .pagination .pager').twbsPagination({
+                    totalPages: total,
+                    visiblePages: total > 4 ? 4 : 2,
+                    first:'首页',
+                    prev:'上一页',
+                    next:'下一页',
+                    last:'尾页',
+                    onPageClick: function (event, page) {
+                        initMusic(page,pageSize);
+                    }
+                });
+            }
         },
-        "error":function(data){
-            alert("请求有误！"+data);
+        "error": function (data) {
+            alert("请求有误！" + data);
         }
 
     })
 
 }
+

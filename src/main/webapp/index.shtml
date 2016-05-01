@@ -27,11 +27,9 @@
         <!--#include virtual="web/left-menu.html" -->
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <!--#include virtual="web/singer-manager.html" -->
-            <!--#include virtual="web/user-suggest.html" -->
             <!--#include virtual="web/music-manager.html" -->
             <!--#include virtual="web/form-manager.html" -->
             <!--#include virtual="web/music-recommend.html" -->
-            <!--#include virtual="web/special-manager.html" -->
         </div>
     </div>
 
@@ -44,7 +42,11 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/fileinput_locale_zh.js"></script>
 <script src="js/typeahead.bundle.js"></script>
+<script src="js/jquery.twbsPagination.js"></script>
 <script src="js/index.js"></script>
-<script src="js/music-manager.js"></script>
+<!--<script src="js/music-manager.js"></script>
+<script src="js/form-manager.js"></script>-->
+<script src="js/utils.js"></script>
+
 </body>
 </html>

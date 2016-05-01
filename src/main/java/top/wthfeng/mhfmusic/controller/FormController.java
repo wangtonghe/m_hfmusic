@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
+import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewError;
 import top.wthfeng.mhfmusic.service.FormService;
 
@@ -129,6 +130,35 @@ public class FormController {
         result.put("code",0);
         result.put("data",null);
         return result;
+    }
+
+    /**
+     * 获取简要歌单列表
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/getMusicList",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object>  getMusicList(SimpleSearchMusicParam param){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code",0);
+        result.put("data",formService.getMusicList(param));
+        return result;
+    }
+
+    /**
+     * 根据歌曲id数组获取歌曲
+     * @param musicIds
+     * @return
+     */
+    @RequestMapping(value = "/getMusicByIds",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getMusicByIds(String musicIds){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code",0);
+        result.put("data",formService.getMusicByIds(str2Array(musicIds)));
+        return result;
+
     }
 
 

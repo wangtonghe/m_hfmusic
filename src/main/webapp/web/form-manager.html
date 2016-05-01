@@ -5,21 +5,25 @@
             <input type="text" class="form-control" id="fm_formname" placeholder="请输入歌单名">
         </div>
         <div class="form-group ">
-            <input type="date" class="form-control" id="fm_createtime">
+            <input type="text" class="form-control" id="fm_creator" placeholder="请输入创建人">
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-info searchform">搜索</button>
+            <button type="button" class="btn btn-info addform">添加</button>
         </div>
     </form>
     <div class="row placeholders">
         <table class="table table-bordered table-hover table-condensed">
             <thead>
             <tr>
+                <td>歌单编号</td>
                 <td>歌单名</td>
+                <td>封面</td>
+                <td>标签</td>
                 <td>创建人</td>
-                <td>描述</td>
                 <td>创建时间</td>
-                <td>是否为系统歌单</td>
+                <td>收藏数</td>
+                <td>上线状态</td>
                 <td>操作</td>
             </tr>
             </thead>
@@ -27,6 +31,145 @@
             </tbody>
         </table>
     </div>
+    <div id="mf-pager" class="row">
+        <div class="col-sm-5 col-sm-offset-7">
+            <div class="pagination ">
+                <ul class="pager"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--歌单添加编辑页面-->
+<div id="form_edit">
+    <h1 class="page-header">歌单编辑页面</h1>
+    <form class="form-horizontal " role="form">
+        <div class="form-group ">
+            <label for="fe_formName" class="col-sm-2 control-label">歌单名称：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="fe_formName" placeholder="请输入歌单名">
+                <input type="hidden" id="fe_formid">
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="fe_formlabel" class="col-sm-2 control-label">歌单标签：</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="fe_formlabel" placeholder="请输入歌单标签，多个以逗号分隔">
+            </div>
+        </div>
+        <div class="form-group text-area">
+            <label for="fe_forminfo" class="col-sm-2 control-label">歌单简介：</label>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="fe_forminfo" rows="5" placeholder="请输入歌单简介"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fe_formcover" class="col-sm-2 control-label">封面图片:</label>
+            <div class="col-sm-5">
+                <input type="file" id="fe_formcover" class="form-control file-upload" placeholder="请上传图片">
+                <input type="hidden" id="fe_formcover_url">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fe_musicAdd" class="col-sm-2 control-label">歌单列表:</label>
+            <div class="col-sm-5">
+                <button class="btn btn-info" id="fe_musicAdd">添加</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class=" col-sm-offset-1 col-sm-8">
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <td>歌曲编号</td>
+                    <td>歌曲名</td>
+                    <td>歌手</td>
+                    <td>专辑</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody class="emform-musicList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-2">
+                <button id="btn-ef-save" class="btn btn-success">保存</button>
+            </div>
+            <div class="col-sm-2">
+                <button id="btn-ef-cancel" class="btn">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--歌单 选择歌曲页面-->
+<div class="form-music-select">
+    <h3 class="page-header">歌单管理-选择歌曲</h3>
+    <form class="form-horizontal">
+
+        <div class="form-group  ">
+            <label for="fe_formselected" class=" col-sm-offset-1 col-sm-1 control-label">已选择的歌曲：</label>
+            <div class="col-sm-5">
+                <textarea class="form-control" id="fe_formselected" rows="5" placeholder="请在下方选择歌曲......"></textarea>
+            </div>
+        </div>
+    </form>
+    <form class="form-inline outmargin">
+        <div class="form-group col-sm-offset-1">
+            <input type="text" class="form-control" id="fe_musicname" placeholder="请输入歌曲名">
+        </div>
+        <div class="form-group ">
+            <input type="text" class="form-control" id="fe_singername" placeholder="请输入歌手名">
+        </div>
+        <div class="form-group ">
+            <input type="text" class="form-control" id="fe_albumname" placeholder="请输入专辑名">
+        </div>
+        <div class="form-group">
+            <button type="button" id="fe_search" class="btn btn-info search-fmusic">搜索</button>
+        </div>
+    </form>
+    <div class="row">
+        <div class=" col-sm-offset-1 col-sm-8">
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <td>歌曲编号</td>
+                    <td>歌曲名</td>
+                    <td>歌手</td>
+                    <td>专辑</td>
+                    <td>操作</td>
+                </tr>
+                </thead>
+                <tbody class="emform-musicList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-2">
+                <button id="btn-musicList" class="btn btn-success">确定</button>
+            </div>
+            <div class="col-sm-2">
+                <button id="btn-musicList-cancel" class="btn">返回</button>
+            </div>
+        </div>
+    </div>
+    <div id="ef-musiclist-pager" class="row">
+        <div class="col-sm-5 col-sm-offset-7">
+            <div class="pagination ">
+                <ul class="pager"></ul>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 

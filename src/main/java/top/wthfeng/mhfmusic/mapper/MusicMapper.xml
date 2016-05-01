@@ -31,7 +31,7 @@
             </if>
         ORDER BY m.id DESC ,m.online DESC
 
-        limit #{page},#{offSet}
+        limit #{offSet},#{pageSize}
     </select>
 
     <!--按条件查询歌曲所查询到的数目-->

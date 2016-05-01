@@ -10,6 +10,7 @@ import top.wthfeng.mhfmusic.model.param.EditMusicParam;
 import top.wthfeng.mhfmusic.model.param.SearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewMusic;
 import top.wthfeng.mhfmusic.service.MusicService;
+import top.wthfeng.mhfmusic.util.NumberUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -28,10 +29,10 @@ public class MusicServiceImpl implements MusicService {
     public PageUtil<ViewMusic> list(SearchMusicParam param) throws Exception{
         List<ViewMusic> list = musicDAO.list(param);
         PageUtil<ViewMusic> listData = new PageUtil<>();
+        listData.setPageSize(param.getPageSize());
         listData.setList(list);
-        listData.setCurrentPageNum(param.getPage());
-        listData.setPageSize(param.getNum());
-        listData.setTotlePageNum(musicDAO.listNum(param));
+        listData.setCurrentPageNum(param.getPageNum());
+        listData.setTotlePageNum(NumberUtil.getPageNum(musicDAO.listNum(param), param.getPageSize()));
         return listData;
     }
 
@@ -50,4 +51,7 @@ public class MusicServiceImpl implements MusicService {
         musicDAO.online(param);
 
     }
+
+
+
 }

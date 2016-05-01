@@ -10,6 +10,7 @@
         <result column="creator" property="creator"/>
         <result column="online" property="online"/>
         <result column="collectNum" property="collectNum"/>
+        <result column="createTime" property="createTime"/>
         <collection property="label" ofType="java.lang.String">
             <result column="label" />
         </collection>
@@ -19,6 +20,7 @@
         <id property="id" column="id" />
         <result property="name" column="name"/>
         <result property="cover" column="cover"/>
+        <result property="info" column="info"/>
         <collection property="label" ofType="java.lang.String">
           <result column="label" />
         </collection>
@@ -34,18 +36,43 @@
     <!--获取系统歌单列表-->
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
             resultMap="listMap">
-        select f.id,f.formName `name`,f.userId,f.online,f.cover,
-          fl.labelName label, u.username creator,f.createTime,
-        ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
-         from form f
-        left join form_label fl on f.id=fl.formId
-        LEFT join `user` u on f.userId=u.id
-        where f.issystem=1
-        <if test="name!=null and name!=''">
-            and   f.formName =#{name}
+        select  t.id,t.formName `name`,t.userId,t.online,t.cover,t.createTime,t.collectNum,
+         fl.labelName label, t.username creator
+        from (
+            select f.id,f.formName ,f.userId,f.online,f.cover,f.createTime,u.username,
+            ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
+            from form f
+            LEFT join `user` u on f.userId=u.id
+            where f.issystem=1
+            <if test=" formName!=null and formName!=''">
+                <bind name="formLikeStr" value="'%'+formName+'%'"/>
+                and   f.formName  like #{formLikeStr}
+            </if>
+            <if test="creator!=null and creator!=''">
+                <bind name="userLikeStr" value="'%'+creator+'%'"/>
+                and  u.username like #{userLikeStr}
+            </if>
+             limit #{offSet},#{pageSize}
+         ) t
+        left join form_label fl on t.id=fl.formId
+
+
+
+
+    </select>
+
+    <select id="listNum" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
+            resultType="java.lang.Integer">
+      SELECT  count(*) from form f
+      left join `user` u on f.userId=u.id
+      where f.issystem=1
+        <if test=" formName!=null and formName!=''">
+            <bind name="formLikeStr" value="'%'+formName+'%'"/>
+            and   f.formName  like #{formLikeStr}
         </if>
-        <if test="label!=null and label!=''">
-            and  sl.labelName=#{label}
+        <if test="creator!=null and creator!=''">
+            <bind name="userLikeStr" value="'%'+creator+'%'"/>
+            and  u.username like #{userLikeStr}
         </if>
     </select>
 
@@ -58,7 +85,7 @@
     <!--获取歌单详情-->
     <select id="details" parameterType="java.lang.Integer"
     resultMap="detailsMap">
-        select f.id,f.formName `name`,f.cover,fl.labelName label,
+        select f.id,f.formName `name`,f.cover,fl.labelName label,f.info,
          fd.id as seq,m.id as musicId,
          m.album,m.name as musicName,s.name as singerName
         from form f
@@ -108,6 +135,60 @@
             (#{id},#{item})
         </foreach>
     </insert>
+
+    <!--获取歌曲列表-->
+    <select id="getMusicList" parameterType="top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam"
+     resultType="top.wthfeng.mhfmusic.model.view.ViewSimpleMusic">
+        SELECT m.id musicId,m.album,m.name as musicName, s.name as singerName
+        FROM music m
+        LEFT JOIN singer s ON  m.singerId=s.id
+        WHERE   m.online=1
+        <if test="musicName!=null and musicName!='' ">
+            <bind name="nameStr" value=" '%'+musicName+'%'" />
+            and  m.name LIKE #{nameStr}
+        </if>
+        <if test="singerName!=null and singerName!='' ">
+            <bind name="singerNameStr" value="'%'+singerName+'%'" />
+            and s.name LIKE #{singerNameStr}
+        </if>
+        <if test="album!=null and album!='' ">
+            <bind name="albumStr" value="'%'+album+'%'" />
+            and m.album LIKE #{albumStr}
+        </if>
+        ORDER BY m.id
+        limit #{offSet},#{pageSize}
+    </select>
+
+    <!--获取歌单列表数目-->
+    <select id="getMusicListNum" parameterType="top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam"
+            resultType="java.lang.Integer">
+        SELECT count(m.id)
+        FROM music m
+        LEFT JOIN singer s ON  m.singerId=s.id
+        WHERE   m.online=1
+        <if test="musicName!=null and musicName!='' ">
+            <bind name="nameStr" value=" '%'+musicName+'%'" />
+            and  m.name LIKE #{nameStr}
+        </if>
+        <if test="singerName!=null and singerName!='' ">
+            <bind name="singerNameStr" value="'%'+singerName+'%'" />
+            and s.name LIKE #{singerNameStr}
+        </if>
+        <if test="album!=null and album!='' ">
+            <bind name="albumStr" value="'%'+album+'%'" />
+            and m.album LIKE #{albumStr}
+        </if>
+    </select>
+
+    <select id="getMusicByIds" parameterType="java.util.Map" resultType="top.wthfeng.mhfmusic.model.view.ViewSimpleMusic">
+        SELECT m.id as musicId,m.name musicName,m.album,s.name singerName
+        from music m
+        left JOIN  singer s on m.singerId=s.id
+        where m.id in
+        <foreach collection="musicIds" separator="," open="(" close=")" item="item">
+            #{item}
+        </foreach>
+    </select>
 
 
 

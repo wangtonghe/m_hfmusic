@@ -1,74 +1,37 @@
 package top.wthfeng.mhfmusic.model.param;
 
+import top.wthfeng.mhfmusic.model.PageParam;
+
 /**
  * @author wangtonghe
  * @date 2016/4/26 22:14
  * @email wthfeng@126.com
  */
-public class FormListParam {
-    /**
-     * 页码
-     */
-    private int page;
-    /**
-     * 每页大小
-     */
-    private int size;
+public class FormListParam extends PageParam{
+
     /**
      * 歌单名
      */
-    private String name;
+    private String formName;
+
     /**
-     * 偏移量
+     * 创建者名
      */
-    private int offset;
-    /**
-     * 标签
-     */
-    private String label;
+    private String creator;
 
-
-    public int getPage() {
-        if(page<=1){
-            return 1;
-        }
-        return page;
+    public String getFormName() {
+        return formName;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setFormName(String formName) {
+        this.formName = formName;
     }
 
-    public int getSize() {
-        if(size<=0){
-            return 20;
-        }
-        return size;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public int getOffset() {
-        return (this.getPage()-1)*this.getSize();
-    }
-
-
 }

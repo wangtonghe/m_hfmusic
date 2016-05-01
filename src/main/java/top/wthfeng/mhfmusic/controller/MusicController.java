@@ -42,7 +42,7 @@ public class MusicController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> list(SearchMusicParam param) throws  Exception{
         Map<String,Object> result = new HashMap<>();

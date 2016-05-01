@@ -6,37 +6,48 @@ package top.wthfeng.mhfmusic.model;
  * @Email : wthfeng@126.com
  */
 public class PageParam {
-    private static  Integer DEFAULTPAGE = 1;
-    private static Integer DEFAULTNUM =15;
-    private Integer page;
-    private Integer num;
+    private static  Integer DEFAULT_PAGE_NUM = 1;
+    private static Integer DEFAULT_PAGE_SIZE =20;
+    /**
+     * 页数，从1开始
+     */
+    private Integer pageNum;
+    /**
+     * 每页大小。默认20
+     */
+    private Integer pageSize;
+    /**
+     * 偏移量
+     */
     private Integer offSet;
 
-    public Integer getNum() {
-        return num;
+    public Integer getPageNum() {
+        if(pageNum==null||pageNum<=0){
+            return DEFAULT_PAGE_NUM;
+        }
+        return pageNum;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        if(pageSize==null||pageSize<=0){
+            return DEFAULT_PAGE_SIZE;
+        }
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Integer getOffSet() {
-        page=(page==null?DEFAULTPAGE:page);
-        num=(num==null?DEFAULTNUM:num);
-        return page*num;
-
+        return (this.getPageNum()-1)*this.getPageSize();
     }
 
     public void setOffSet(Integer offSet) {
-        this.offSet = page*num;
-    }
-
-    public Integer getPage() {
-        page=(page==null?DEFAULTPAGE:page);
-        return page-1;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
+        this.offSet = offSet;
     }
 }

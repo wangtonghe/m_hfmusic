@@ -1,9 +1,12 @@
 package top.wthfeng.mhfmusic.service;
 
+import top.wthfeng.mhfmusic.model.PageUtil;
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
+import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
+import top.wthfeng.mhfmusic.model.view.ViewSimpleMusic;
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ public interface FormService {
      * @param param
      * @return
      */
-     List<ViewFormList> list(FormListParam param);
+    PageUtil<ViewFormList> list(FormListParam param);
 
     /**
      * 歌单上下线
@@ -46,6 +49,20 @@ public interface FormService {
      * @param param
      */
     void add(EditFormParam param);
+
+    /**
+     * 获取歌单列表
+     * @param param
+     * @return
+     */
+    PageUtil<ViewSimpleMusic> getMusicList(SimpleSearchMusicParam param);
+
+    /**
+     * 根据歌曲id集合查询歌曲
+     * @param musicIds
+     * @return
+     */
+    List<ViewSimpleMusic> getMusicByIds(int []musicIds);
 
 
 }

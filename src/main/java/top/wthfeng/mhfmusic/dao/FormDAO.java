@@ -2,8 +2,10 @@ package top.wthfeng.mhfmusic.dao;
 
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
+import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
+import top.wthfeng.mhfmusic.model.view.ViewSimpleMusic;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,16 @@ public interface FormDAO {
      * @return
      */
     List<ViewFormList> list(FormListParam param);
+
+    /**
+     * 获取符合条件下的歌单数
+     * @param param
+     * @return
+     */
+    Integer listNum(FormListParam param);
+
+
+
 
     /**
      * 歌单上下线
@@ -70,6 +82,27 @@ public interface FormDAO {
      * @param param
      */
     void addFormLabel(EditFormParam param);
+
+    /**
+     * 获取歌单列表
+     * @param param
+     * @return
+     */
+    List<ViewSimpleMusic> getMusicList(SimpleSearchMusicParam param);
+
+    /**
+     * 获取歌单列表数目
+     * @param param
+     * @return
+     */
+    Integer getMusicListNum(SimpleSearchMusicParam param);
+
+    /**
+     *  根据歌曲id集合查询歌曲
+     * @param param
+     * @return
+     */
+    List<ViewSimpleMusic> getMusicByIds(Map<String,Object> param);
 
 
 }

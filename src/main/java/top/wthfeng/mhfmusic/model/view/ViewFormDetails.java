@@ -14,6 +14,7 @@ public class ViewFormDetails {
     private int id;
     private String name;
     private String cover;
+    private String info;
     private List<String> label;
     private List<Music4Form> musicList;
 
@@ -55,5 +56,13 @@ public class ViewFormDetails {
 
     public void setMusicList(List<Music4Form> musicList) {
         this.musicList = musicList;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
