@@ -12,4 +12,58 @@
         </if>
     </select>
 
+    <!--获取歌手列表-->
+    <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.SingerListParam" 
+            resultType="top.wthfeng.mhfmusic.model.view.ViewSinger">
+        select s.id,s.name singerName,s.area,s.portrait,s.active,
+        count(m.id)as musicNum,sum(m.likenum)as likeNum
+         from singer s
+         left join music m on s.id=m.singerId
+         <where>
+         <if test="singerName!=null and singerName!=''">
+             <bind name="singerNameStr" value="'%'+singerName+'%'" />
+             s.name like #{singerNameStr}
+         </if>
+         <if test="area!=null and area!=''">
+             <bind name="areaStr" value="'%'+area+'%'"/>
+             s.area like #{areaStr}
+         </if>
+         </where>
+         GROUP BY s.id
+         ORDER  By likeNum
+         limit #{offSet},#{pageSize}
+    </select>
+    <!--获取歌手总数-->
+    <select id="listNum" parameterType="top.wthfeng.mhfmusic.model.param.SingerListParam" resultType="java.lang.Integer">
+        select count(s.id)  from singer s
+        <where>
+            <if test="singerName!=null and singerName!=''">
+                <bind name="singerNameStr" value="'%'+singerName+'%'" />
+                s.name like #{singerNameStr}
+            </if>
+            <if test="area!=null and area!=''">
+                <bind name="areaStr" value="'%'+area+'%'"/>
+                s.area like #{areaStr}
+            </if>
+        </where>
+    </select>
+
+    <!--编辑歌手-->
+    <update id="edit" parameterType="top.wthfeng.mhfmusic.model.param.SingerEditParam">
+       UPDATE singer set `name`=#{singerName},area=#{area},portrait=#{portrait},info=#{info}
+       where id=#{id}
+    </update>
+
+    <!--添加歌手-->
+    <insert id="add" parameterType="top.wthfeng.mhfmusic.model.param.SingerEditParam">
+        insert into singer(`name`,area,portrait,info)
+         VALUES (#{singerName},#{area},#{portrait},#{info})
+    </insert>
+
+    <!--设置歌手可见性-->
+    <update id="active" parameterType="java.util.Map">
+        UPDATE singer set active=#{flag}
+        where id=#{id}
+    </update>
+
 </mapper>
