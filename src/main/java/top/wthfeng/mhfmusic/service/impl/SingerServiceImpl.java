@@ -6,12 +6,15 @@ import top.wthfeng.mhfmusic.dao.SingerDAO;
 import top.wthfeng.mhfmusic.model.PageUtil;
 import top.wthfeng.mhfmusic.model.param.SingerListParam;
 import top.wthfeng.mhfmusic.model.param.SingerParam;
+import top.wthfeng.mhfmusic.model.param.SingerEditParam;
+import top.wthfeng.mhfmusic.model.param.SingerListParam;
 import top.wthfeng.mhfmusic.model.view.ViewSinger;
 import top.wthfeng.mhfmusic.model.view.ViewSingerName;
 import top.wthfeng.mhfmusic.service.SingerService;
 import top.wthfeng.mhfmusic.util.NumberUtil;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangtonghe
@@ -29,20 +32,22 @@ public class SingerServiceImpl implements SingerService {
         return singerDAO.getMatchSinger(singerName);
     }
 
-    @Override
-    public PageUtil<ViewSinger> list(SingerListParam param)throws Exception {
-        PageUtil pageUtil = new PageUtil();
-        pageUtil.setList(singerDAO.list(param));
-        pageUtil.setTotlePageNum(NumberUtil.getPageNum(singerDAO.listNum(param), param.getPageSize()));
-         return pageUtil;
 
-    }
 
     @Override
     public void delete(int singerId) throws Exception {
         singerDAO.delete(singerId);
-
     }
+    public PageUtil<ViewSinger> list(SingerListParam param) {
+        PageUtil<ViewSinger> list = new PageUtil<>();
+        list.setCurrentPageNum(param.getPageNum());
+        list.setList(singerDAO.list(param));
+        list.setPageSize(param.getPageSize());
+        list.setTotlePageNum(NumberUtil.getPageNum(singerDAO.listNum(param),param.getPageSize()));
+        return list;
+    }
+
+
 
     @Override
     public void add(SingerParam param) throws Exception {
@@ -50,8 +55,7 @@ public class SingerServiceImpl implements SingerService {
     }
 
     @Override
-    public void edit(SingerParam param) throws Exception {
+    public void edit(SingerParam param) throws Exception{
         singerDAO.edit(param);
-
     }
 }

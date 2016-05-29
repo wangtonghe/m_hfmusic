@@ -56,4 +56,5 @@ public interface SingerDAO {
      * @throws Exception
      */
     void edit(SingerParam param)throws Exception;
+
 }

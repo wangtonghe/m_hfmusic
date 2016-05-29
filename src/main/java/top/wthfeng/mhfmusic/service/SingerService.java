@@ -1,6 +1,7 @@
 package top.wthfeng.mhfmusic.service;
 
 import top.wthfeng.mhfmusic.model.PageUtil;
+import top.wthfeng.mhfmusic.model.param.SingerEditParam;
 import top.wthfeng.mhfmusic.model.param.SingerListParam;
 import top.wthfeng.mhfmusic.model.param.SingerParam;
 import top.wthfeng.mhfmusic.model.view.ViewSinger;
@@ -19,6 +20,7 @@ public interface SingerService {
      * @param singerName
      * @return
      */
+
     List<ViewSingerName> getMatchSinger(String singerName)throws Exception;
 
     /**
@@ -48,4 +50,6 @@ public interface SingerService {
      * @throws Exception
      */
     void edit(SingerParam param)throws Exception;
+
+
 }

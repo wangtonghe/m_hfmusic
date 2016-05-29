@@ -1,8 +1,11 @@
 package top.wthfeng.mhfmusic.controller;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import top.wthfeng.mhfmusic.model.param.SingerEditParam;
 import top.wthfeng.mhfmusic.model.param.SingerListParam;
 import top.wthfeng.mhfmusic.model.param.SingerParam;
 import top.wthfeng.mhfmusic.model.view.ViewError;
@@ -11,6 +14,8 @@ import top.wthfeng.mhfmusic.service.SingerService;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 /**
  * 歌手管理
@@ -33,7 +38,6 @@ public class SingerController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public Map<String,Object> list(SingerListParam param)throws Exception{
         Map<String,Object> result = new HashMap<>();
-
         result.put("code",0);
         result.put("data",singerService.list(param));
         return result;
@@ -51,7 +55,9 @@ public class SingerController {
         result.put("code",0);
         result.put("data",null);
         return result;
+
     }
+
 
     /**
      * 添加歌手
@@ -85,5 +91,6 @@ public class SingerController {
         result.put("data",null);
         return result;
     }
+
 
 }
