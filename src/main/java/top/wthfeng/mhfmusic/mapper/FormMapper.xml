@@ -37,7 +37,7 @@
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"
             resultMap="listMap">
         select  t.id,t.formName `name`,t.userId,t.online,t.cover,t.createTime,t.collectNum,
-         fl.labelName label, t.username creator
+         sl.labelName label, t.username creator
         from (
             select f.id,f.formName ,f.userId,f.online,f.cover,f.createTime,u.username,
             ( SELECT count(fc.id) from form_collect fc where fc.formId=f.id )as collectNum
@@ -55,10 +55,7 @@
              limit #{offSet},#{pageSize}
          ) t
         left join form_label fl on t.id=fl.formId
-
-
-
-
+        left join syslabel sl on fl.id=sl.id
     </select>
 
     <select id="listNum" parameterType="top.wthfeng.mhfmusic.model.param.FormListParam"

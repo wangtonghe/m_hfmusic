@@ -44,8 +44,6 @@
 <script src="js/typeahead.bundle.js"></script>
 <script src="js/jquery.twbsPagination.js"></script>
 <script src="js/index.js"></script>
-<!--<script src="js/music-manager.js"></script>
-<script src="js/form-manager.js"></script>-->
 <script src="js/utils.js"></script>
 
 </body>

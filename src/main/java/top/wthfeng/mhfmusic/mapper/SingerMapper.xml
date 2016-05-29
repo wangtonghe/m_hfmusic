@@ -12,4 +12,57 @@
         </if>
     </select>
 
+    <!--根据条件获取歌手-->
+    <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.SingerListParam"
+            resultType="top.wthfeng.mhfmusic.model.view.ViewSinger">
+        SELECT s.id singerId,s.name singerName,s.sex,count(s.id) musicNum,
+        s.portrait,s.active,s.info
+        FROM singer s
+        left JOIN  music m on s.id=m.singerId
+        where s.active=1
+        <if test="singerId!=null">
+            and s.id=#{singerId}
+        </if>
+        <if test="singerName!=null">
+            <bind name="nameLike" value="singerName+'%'" />
+            and s.name like #{nameLike}
+        </if>
+        group by s.id
+        limit #{offSet},#{pageSize}
+    </select>
+
+    <!--根据条件获取歌手总数-->
+    <select id="listNum" parameterType="top.wthfeng.mhfmusic.model.param.SingerListParam"
+            resultType="int">
+        SELECT count(s.id)
+        FROM singer s
+        where s.active=1
+        <if test="singerId>0">
+            and s.id=#{singerId}
+        </if>
+        <if test="singerName!=null">
+            <bind name="nameLike" value="singerName+'%'" />
+            and s.name like #{nameLike}
+        </if>
+
+    </select>
+
+    <!--删除歌手-->
+    <update id="delete" parameterType="int">
+       UPDATE singer set active=0 where id=#{singerId}
+    </update>
+
+    <!--添加歌手-->
+    <insert id="add" parameterType="top.wthfeng.mhfmusic.model.param.SingerParam">
+        INSERT  INTO singer(name,sex,info,active,portrait)
+        VALUES (#{singerName},#{sex},#{info},1,#{portrait})
+    </insert>
+
+    <!--编辑歌手-->
+    <update id="edit" parameterType="top.wthfeng.mhfmusic.model.param.SingerParam">
+        UPDATE singer set name=#{singerName},
+         sex=#{sex},info=#{info},portrait=#{portrait}
+         where id=#{singerId}
+    </update>
+
 </mapper>

@@ -1,6 +1,145 @@
+<div class="singer-manager">
+    <h1 class="page-header">歌手管理</h1>
+    <form class="form-inline outmargin">
+        <div class="form-group">
+            <input type="text" class="form-control" id="ms_singerId" placeholder="歌手编号">
+        </div>
 
-     <div class="singer-manager">
-         <h1 class="page-header">歌手管理</h1>
-         <div class="row placeholders">
-         </div>
-     </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="ms_singerName" placeholder="歌手名">
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-info searchSinger">搜索</button>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-info addSinger">添加</button>
+        </div>
+    </form>
+    <div class="row placeholders">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <td>编号</td>
+                <td>姓名</td>
+                <td>封面</td>
+                <td>歌曲数</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody class="msinger-body">
+            </tbody>
+        </table>
+    </div>
+    <div id="ms-pager" class="row">
+        <div class="col-sm-5 col-sm-offset-7">
+            <div class="pagination ">
+                <ul class="pager"></ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="ms_edit-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">编辑歌手</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="e_SingerName" class="col-sm-2  col-xs-offset-1 control-label">歌手名</label>
+                            <div class="col-sm-6 ">
+                                <input type="text" class="form-control" id="e_SingerName" placeholder="请输入歌手名"/>
+                                <input type="hidden" id="e_SingerId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="e_singerSex" class="col-sm-2  col-xs-offset-1 control-label">性别：</label>
+                            <div class="col-sm-6 ">
+                                <select class="form-control" id="e_singerSex">
+                                    <option value="0" selected = "selected" >男</option>
+                                    <option value="1">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="e_singerInfo" class="col-sm-2  col-xs-offset-1 control-label">歌手简介：</label>
+                            <div class="col-sm-6 ">
+                                <textarea class="form-control" rows="6" id="e_singerInfo" placeholder="歌手介绍，不超过150字"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="e_SingerPortrait" class="col-sm-2  col-xs-offset-1 control-label">头像</label>
+                            <div class="col-sm-6 ">
+                                <input type="file" class="form-control file-upload" id="e_SingerPortrait"/>
+                                <input type="hidden" id="e_portrait_url"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3  col-sm-6">
+                                <br>
+                                <button type="button" id="edit_singer_save" class="btn btn-success col-sm-offset-2">保存
+                                </button>
+                                <button type="button" class="btn btn-default "data-dismiss="modal" >取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ms_add-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加歌手</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="add_singername" class="col-sm-2  col-xs-offset-1 control-label">歌手名：</label>
+                            <div class="col-sm-6 ">
+                                <input type="text" class="form-control" id="add_singername" placeholder="请输入歌手名"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_singerSex" class="col-sm-2  col-xs-offset-1 control-label">性别：</label>
+                            <div class="col-sm-6 ">
+                                <select class="form-control" id="add_singerSex">
+                                    <option value="0" selected = "selected" >男</option>
+                                    <option value="1">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_info" class="col-sm-2  col-xs-offset-1 control-label">歌手简介：</label>
+                            <div class="col-sm-6 ">
+                                <textarea class="form-control" rows="6" id="add_info" placeholder="歌手介绍，不超过150字"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="add_portrait" class="col-sm-2  col-xs-offset-1 control-label">头像</label>
+                            <div class="col-sm-6 ">
+                                <input type="file" class="form-control file-upload" id="add_portrait"/>
+                                <input type="hidden" id="add_portrait_url"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3  col-sm-6">
+                                <br>
+                                <button type="button" id="add_singer_save" class="btn btn-success  col-sm-offset-2">添加
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
