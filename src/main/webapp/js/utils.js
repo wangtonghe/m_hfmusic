@@ -18,6 +18,7 @@ $(".file-upload").fileinput(
     {
         uploadUrl:rootUrl,
         language:"zh",
+        uploadAsync: true,
         allowedFileExtensions:['jpg',  'png', 'lrc','mp3','mp4'],
         showPreview:false,
         showRemove:false
