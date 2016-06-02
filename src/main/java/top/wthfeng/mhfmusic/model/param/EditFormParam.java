@@ -12,7 +12,7 @@ public class EditFormParam {
     private int id;
     private String name;
     private String cover;
-    private String[] arrLabels;
+    private int[] labels ;
     private String info;
     private Date createTime;
     private Integer userId;
@@ -73,12 +73,12 @@ public class EditFormParam {
         this.info = info;
     }
 
-    public String[] getArrLabels() {
-        return arrLabels;
+    public int[] getLabels() {
+        return labels;
     }
 
-    public void setArrLabels(String[] arrLabels) {
-        this.arrLabels = arrLabels;
+    public void setLabels(int[] labels) {
+        this.labels = labels;
     }
 
     public int[] getArrMusicIds() {

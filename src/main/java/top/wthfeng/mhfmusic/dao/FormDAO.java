@@ -6,6 +6,7 @@ import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
 import top.wthfeng.mhfmusic.model.view.ViewSimpleMusic;
+import top.wthfeng.mhfmusic.model.view.ViewSysLabels;
 
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,12 @@ public interface FormDAO {
      * @return
      */
     List<ViewSimpleMusic> getMusicByIds(Map<String,Object> param);
+
+    /**
+     * 获取系统标签
+     * @return
+     */
+    List<ViewSysLabels> getSysLabel();
 
 
 }

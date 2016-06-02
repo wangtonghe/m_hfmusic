@@ -10,6 +10,7 @@ import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
 import top.wthfeng.mhfmusic.model.view.ViewSimpleMusic;
+import top.wthfeng.mhfmusic.model.view.ViewSysLabels;
 import top.wthfeng.mhfmusic.service.FormService;
 import top.wthfeng.mhfmusic.util.NumberUtil;
 
@@ -79,13 +80,15 @@ public class FormServiceImpl implements FormService {
             formDAO.delFormMusic(param.getId());
             formDAO.addFormMusic(param);
         }
-        if(param.getArrLabels()!=null){
+        if(param.getLabels()!=null){
             formDAO.delFormLabel(param.getId());
             formDAO.addFormLabel(param);
         }
+    }
 
-
-
+    @Override
+    public List<ViewSysLabels> getSysLabel() {
+        return formDAO.getSysLabel();
     }
 
     @Override
@@ -95,11 +98,9 @@ public class FormServiceImpl implements FormService {
             formDAO.delFormMusic(param.getId());
             formDAO.addFormMusic(param);
         }
-        if(param.getArrLabels()!=null){
+        if(param.getLabels()!=null){
             formDAO.delFormLabel(param.getId());
             formDAO.addFormLabel(param);
         }
-
-
     }
 }

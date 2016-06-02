@@ -1,6 +1,8 @@
 /**
  * Created by wangtonghe on 2016/4/30.
  */
+var selected_labels=new Array();
+var selected_ids=new Array();
 $(function () {
     initForm(1,pageSize); //加载歌曲数据
 
@@ -91,9 +93,11 @@ $(function () {
     //添加歌曲-显示歌曲列表
     $("#fe_musicAdd").on("click",function(){
         $("#form_edit").hide();
+        $(".singer-manager").hide();
         $(".form-music-select").show();
+
         $("#fe_formselected").val(musicNames.join(",")); //初始化已选择文本框
-        getfe_musicList(1,pageSize,musicIds);
+       getfe_musicList(1,pageSize,musicIds);
 
     });
     $("#fe_search").on("click",function(){
@@ -140,6 +144,8 @@ $(function () {
         getMusicByIds(musicIds);
     });
 
+
+
     //歌单编辑/保存 取消
     $("#btn-ef-cancel").on("click",function(){
         $("#form_edit").hide();
@@ -147,12 +153,39 @@ $(function () {
 
     });
 
+
+
+   /* $("#form_edit .select-labels .label").on("click",function(){
+     var lab=$(this);
+     lab.addClass("btn-danger").removeClass("btn-primary");
+     });*/
+
+  /*  $("#form_edit .select-labels").on("click",".save",function(e){
+
+        for(var i=0;i<selected_labels.length;i++){
+            var span="<span class='margin-right'>"+selected_labels[i]+"</span>";
+            $(".select-label-div").append(span);
+        }
+        $('[data-toggle=popover]').trigger("click");
+        return false;
+
+    });*/
+
+
     //歌单编辑保存
     $("#btn-ef-save").on("click",function(){
         var formid= $("#fe_formid").val();
         var formname= $("#fe_formName").val();
         var forminfo= $("#fe_forminfo").val();
-        var formlabel= $("#fe_formlabel").val();
+        $("#form_edit .select-labels label").each(function(){
+            var each=$(this);
+            if(each.hasClass("active"))
+            {
+                selected_ids.push(each.find("input").val());
+            }
+        });
+        var formlabel= selected_ids.join(",");
+
         var formcoverurl=$("#fe_formcover_url").val();
         console.log(musicIds.toString());
         var url="admin/form/edit";
@@ -197,8 +230,8 @@ function initForm(pageNum, pageSize) {
                 var size = data.data.list.length;
                 for (var i = 0; i < data.data.list.length; i++) {
                     var columnData = $('<tr class="form-list"><td>' + data.data.list[i].id + '</td><td>' +
-                        data.data.list[i].name + '</td><td><img src="' + data.data.list[i].cover + '" width="50"/></td><td>' + data.data.list[i].label +
-                        '</td><td>' + data.data.list[i].creator + '</td>' + '<td>' + unix_to_datetime(data.data.list[i].createTime) + '</td>' +
+                        data.data.list[i].name + '</td><td><img src="' + data.data.list[i].cover + '" width="50"/></td>'+
+                        '<td>' + data.data.list[i].creator + '</td>' + '<td>' + unix_to_datetime(data.data.list[i].createTime) + '</td>' +
                         '<td>' + data.data.list[i].collectNum + '</td>' + '<td>' + data.data.list[i].online + '</td>' +
                         '<td><button class="btn btn-sm btn-primary edit' + '">编辑</button> ' +
                         ' <button class="btn btn-sm btn-danger flag online">下线</button></td></tr>');
@@ -228,6 +261,28 @@ function initForm(pageNum, pageSize) {
             alert("请求有误！" + data);
         }
     })
+    var form_type_comtent=$("<div><div class='row labels-list'></div><div class='row labels-btn'></div></div>");
+   /* $.get("admin/form/getSysLabels",{},function(data){
+        if(data.code!=0){
+            return;
+        }
+        var list =data.data;
+        for(var i=0;i<list.length;i++){
+            var label="<div class='col-sm-4' ><span  class='form-label-text'>"+list[i].labelName+"</span><input type='hidden' value='"+list[i].labelId+"'></div>";
+            form_type_comtent.find(".labels-list").append(label);
+        }
+        var row="<div class='col-sm-offset-2 col-sm-2'><button class='btn btn-info btn-sm save'>保存</button></div><div class='col-sm-offset-1 col-sm-2'><button class='btn btn-default btn-sm cancel'>取消</button></div>";
+        form_type_comtent.find(".labels-btn").append(row);
+    },"json");
+
+    $('[data-toggle=popover]').popover({
+        content:form_type_comtent,
+        placement:"bottom",
+        html:true,
+        trigger:"click focus"
+    });*/
+    // 反转按钮状态
+    $('#s_labels').button('reset');
 }
 
 

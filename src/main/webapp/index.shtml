@@ -15,6 +15,7 @@
     <link href="css/fileinput.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
     <link href="css/music-manager.css" rel="stylesheet">
+    <link href="css/form-manager.css" rel="stylesheet">
 
 </head>
 
@@ -44,6 +45,9 @@
 <script src="js/typeahead.bundle.js"></script>
 <script src="js/jquery.twbsPagination.js"></script>
 <script src="js/index.js"></script>
+<script src="js/form-manager.js"></script>
+<script src="js/music-manager.js"></script>
+<script src="js/singer-manager.js"></script>
 <script src="js/utils.js"></script>
 
 </body>

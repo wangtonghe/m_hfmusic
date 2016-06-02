@@ -7,6 +7,7 @@ import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
 import top.wthfeng.mhfmusic.model.view.ViewFormDetails;
 import top.wthfeng.mhfmusic.model.view.ViewFormList;
 import top.wthfeng.mhfmusic.model.view.ViewSimpleMusic;
+import top.wthfeng.mhfmusic.model.view.ViewSysLabels;
 
 import java.util.List;
 
@@ -63,6 +64,12 @@ public interface FormService {
      * @return
      */
     List<ViewSimpleMusic> getMusicByIds(int []musicIds);
+
+    /**
+     * 获取系统标签
+     * @return
+     */
+    List<ViewSysLabels> getSysLabel();
 
 
 }

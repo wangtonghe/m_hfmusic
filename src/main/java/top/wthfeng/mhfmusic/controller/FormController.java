@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import top.wthfeng.mhfmusic.model.SysUser;
 import top.wthfeng.mhfmusic.model.param.EditFormParam;
 import top.wthfeng.mhfmusic.model.param.FormListParam;
 import top.wthfeng.mhfmusic.model.param.SimpleSearchMusicParam;
@@ -28,6 +27,8 @@ public class FormController {
 
     @Resource
     private FormService formService;
+
+    private static int   HEFENG_XIAOBIAN_DEFAULT_ID =10;
 
     /**
      * 歌单列表
@@ -79,18 +80,18 @@ public class FormController {
      */
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> edit(EditFormParam param,String musicIds,String labels){
+    public Map<String,Object> edit(EditFormParam param,String musicIds,String labelIds){
         Map<String,Object> result = new HashMap<>();
         if(param.getId()<=0){
             result.put("code",1);
             result.put("data",new ViewError("id字段非法！"));
             return result;
         }
-        if(musicIds!=null){
+        if(musicIds!=null&&musicIds!=""){
             param.setArrMusicIds(str2Array(musicIds));
         }
-        if(labels!=null){
-            param.setArrLabels(labels.split(","));
+        if(labelIds!=null&&musicIds!=""){
+            param.setLabels(str2Array(labelIds));
         }
         formService.edit(param);
         result.put("code",0);
@@ -105,7 +106,7 @@ public class FormController {
      */
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> add(EditFormParam param,String musicIds,String labels, HttpServletRequest request){
+    public Map<String,Object> add(EditFormParam param,String musicIds,String labelIds, HttpServletRequest request){
         Map<String,Object> result = new HashMap<>();
         if(param.getName()==null){
             result.put("code",1);
@@ -122,10 +123,14 @@ public class FormController {
             result.put("data",new ViewError("info为必填字段"));
             return result;
         }
-        Integer  sysUserId = ((SysUser) request.getSession().getAttribute("sysUser")).getId();
-        param.setUserId(sysUserId);
-        param.setArrMusicIds(str2Array(musicIds));
-        param.setArrLabels(labels.split(","));
+//        Integer  sysUserId = ((SysUser) request.getSession().getAttribute("sysUser")).getId();
+        param.setUserId(HEFENG_XIAOBIAN_DEFAULT_ID);  //固定为小编id
+        if(musicIds!=null&&musicIds!=""){
+            param.setArrMusicIds(str2Array(musicIds));
+        }
+        if(labelIds!=null&&labelIds!=""){
+            param.setLabels(str2Array(labelIds));
+        }
         formService.add(param);
         result.put("code",0);
         result.put("data",null);
@@ -159,6 +164,19 @@ public class FormController {
         result.put("data",formService.getMusicByIds(str2Array(musicIds)));
         return result;
 
+    }
+
+    /**
+     * 获取系统歌单
+     * @return
+     */
+    @RequestMapping(value = "/getSysLabels",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getSysLabels(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("code",0);
+        result.put("data",formService.getSysLabel());
+        return result;
     }
 
 

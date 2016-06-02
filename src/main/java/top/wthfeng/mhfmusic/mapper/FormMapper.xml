@@ -127,8 +127,8 @@
 
     <!--添加歌单标签-->
     <insert id="addFormLabel" parameterType="top.wthfeng.mhfmusic.model.param.EditFormParam">
-        insert into form_label(formId,labelName) VALUES
-        <foreach collection="arrLabels" item="item" separator=",">
+        insert into form_label(formId,labelId) VALUES
+        <foreach collection="labels" item="item" separator=",">
             (#{id},#{item})
         </foreach>
     </insert>
@@ -187,7 +187,9 @@
         </foreach>
     </select>
 
-
-
+    <!--获取系统标签-->
+    <select id="getSysLabel" resultType="top.wthfeng.mhfmusic.model.view.ViewSysLabels">
+        select s.id labelId,s.labelName from syslabel s
+    </select>
 
 </mapper>

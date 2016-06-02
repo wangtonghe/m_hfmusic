@@ -19,7 +19,6 @@
                 <td>歌单编号</td>
                 <td>歌单名</td>
                 <td>封面</td>
-                <td>标签</td>
                 <td>创建人</td>
                 <td>创建时间</td>
                 <td>收藏数</td>
@@ -52,10 +51,23 @@
             </div>
         </div>
         <div class="form-group ">
-            <label for="fe_formlabel" class="col-sm-2 control-label">歌单标签：</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="fe_formlabel" placeholder="请输入歌单标签，多个以逗号分隔">
+            <label class="col-sm-2 control-label">歌单标签：</label>
+            <div class="col-sm-9">
+                <div class="btn-group row select-labels row" id="s_labels" data-toggle="buttons" >
+                    <label class="btn btn-primary"><input type="checkbox" value="1">安静</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="2">学习</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="3">华语</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="4">流行</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="5">伤感</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="6">民谣</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="7">古典</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="8">运动</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="9">孤独</label>
+                    <label class="btn btn-primary"><input type="checkbox" value="10">思念</label>
+                </div>
             </div>
+
+
         </div>
         <div class="form-group text-area">
             <label for="fe_forminfo" class="col-sm-2 control-label">歌单简介：</label>
@@ -108,7 +120,7 @@
     </div>
 </div>
 
-<!--歌单 选择歌曲页面-->
+<!--歌单 选择歌曲页面-->gi
 <div class="form-music-select">
     <h3 class="page-header">歌单管理-选择歌曲</h3>
     <form class="form-horizontal">
