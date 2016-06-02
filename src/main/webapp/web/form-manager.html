@@ -41,86 +41,87 @@
 
 <!--歌单添加编辑页面-->
 <div id="form_edit">
-    <h1 class="page-header">歌单编辑页面</h1>
-    <form class="form-horizontal " role="form">
-        <div class="form-group ">
-            <label for="fe_formName" class="col-sm-2 control-label">歌单名称：</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" id="fe_formName" placeholder="请输入歌单名">
-                <input type="hidden" id="fe_formid">
+
+        <h1 class="page-header">歌单编辑页面</h1>
+        <form class="form-horizontal " role="form">
+            <div class="form-group ">
+                <label for="fe_formName" class="col-sm-2 control-label">歌单名称：</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="fe_formName" placeholder="请输入歌单名">
+                    <input type="hidden" id="fe_formid">
+                </div>
             </div>
-        </div>
-        <div class="form-group ">
-            <label class="col-sm-2 control-label">歌单标签：</label>
-            <div class="col-sm-9">
-                <div class="btn-group row select-labels row" id="s_labels" data-toggle="buttons" >
-                    <label class="btn btn-primary"><input type="checkbox" value="1">安静</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="2">学习</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="3">华语</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="4">流行</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="5">伤感</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="6">民谣</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="7">古典</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="8">运动</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="9">孤独</label>
-                    <label class="btn btn-primary"><input type="checkbox" value="10">思念</label>
+            <div class="form-group ">
+                <label class="col-sm-2 control-label">歌单标签：</label>
+                <div class="col-sm-9">
+                    <div class="btn-group row select-labels row" id="s_labels" data-toggle="buttons" >
+                        <label class="btn btn-primary"><input type="checkbox" value="1">安静</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="2">学习</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="3">华语</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="4">流行</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="5">伤感</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="6">民谣</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="7">古典</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="8">运动</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="9">孤独</label>
+                        <label class="btn btn-primary"><input type="checkbox" value="10">思念</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="form-group text-area">
+                <label for="fe_forminfo" class="col-sm-2 control-label">歌单简介：</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" id="fe_forminfo" rows="5" placeholder="请输入歌单简介"></textarea>
                 </div>
             </div>
 
-
+            <div class="form-group">
+                <label for="fe_formcover" class="col-sm-2 control-label">封面图片:</label>
+                <div class="col-sm-5">
+                    <input type="file" id="fe_formcover" class="form-control file-upload" placeholder="请上传图片">
+                    <input type="hidden" id="fe_formcover_url">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fe_musicAdd" class="col-sm-2 control-label">歌单列表:</label>
+                <div class="col-sm-5">
+                    <button class="btn btn-info" id="fe_musicAdd">添加</button>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <div class="row">
+            <div class=" col-sm-offset-1 col-sm-8">
+                <table class="table  table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <td>歌曲编号</td>
+                        <td>歌曲名</td>
+                        <td>歌手</td>
+                        <td>专辑</td>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody class="emform-musicList">
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="form-group text-area">
-            <label for="fe_forminfo" class="col-sm-2 control-label">歌单简介：</label>
-            <div class="col-sm-5">
-                <textarea class="form-control" id="fe_forminfo" rows="5" placeholder="请输入歌单简介"></textarea>
+        <div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-2">
+                    <button id="btn-ef-save" class="btn btn-success">保存</button>
+                </div>
+                <div class="col-sm-2">
+                    <button id="btn-ef-cancel" class="btn">取消</button>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="fe_formcover" class="col-sm-2 control-label">封面图片:</label>
-            <div class="col-sm-5">
-                <input type="file" id="fe_formcover" class="form-control file-upload" placeholder="请上传图片">
-                <input type="hidden" id="fe_formcover_url">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="fe_musicAdd" class="col-sm-2 control-label">歌单列表:</label>
-            <div class="col-sm-5">
-                <button class="btn btn-info" id="fe_musicAdd">添加</button>
-            </div>
-        </div>
-    </form>
-    <br/>
-    <div class="row">
-        <div class=" col-sm-offset-1 col-sm-8">
-            <table class="table  table-hover table-condensed">
-                <thead>
-                <tr>
-                    <td>歌曲编号</td>
-                    <td>歌曲名</td>
-                    <td>歌手</td>
-                    <td>专辑</td>
-                    <td>操作</td>
-                </tr>
-                </thead>
-                <tbody class="emform-musicList">
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div>
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-2">
-                <button id="btn-ef-save" class="btn btn-success">保存</button>
-            </div>
-            <div class="col-sm-2">
-                <button id="btn-ef-cancel" class="btn">取消</button>
-            </div>
-        </div>
-    </div>
+
 </div>
-
-<!--歌单 选择歌曲页面-->gi
 <div class="form-music-select">
     <h3 class="page-header">歌单管理-选择歌曲</h3>
     <form class="form-horizontal">
@@ -183,5 +184,8 @@
 
 
 </div>
+
+<!--歌单 选择歌曲页面-->
+
 
 

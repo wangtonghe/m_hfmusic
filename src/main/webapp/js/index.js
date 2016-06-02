@@ -13,8 +13,8 @@ $(function(){
             $(".container-fluid .main > div").each(function(){
                 if($(this).hasClass(choice)){
                     $(this).show().siblings().hide();
-                    //$.getScript("js/"+choice+".js",function(){
-                    //});
+                    $.getScript("js/"+choice+".js",function(){
+                    });
                 }
             })
         }
@@ -29,7 +29,7 @@ $(function(){
             if($(this).hasClass(choice)){
                 $(this).show().siblings().hide();
                 //$("script[src='js/*-manager.js']").remove();
-                //$.getScript("js/"+choice+".js",function(){});
+                $.getScript("js/"+choice+".js",function(){});
             }
         })
 

@@ -43,6 +43,7 @@ $(function () {
     $(".form-manager .addform").on("click",function(){
         $(".form-manager").hide();
         $("#form_edit").show();
+
     });
 
     //编辑歌单，弹出编辑页面
@@ -93,7 +94,7 @@ $(function () {
     //添加歌曲-显示歌曲列表
     $("#fe_musicAdd").on("click",function(){
         $("#form_edit").hide();
-        $(".singer-manager").hide();
+        //$(".singer-manager").hide();
         $(".form-music-select").show();
 
         $("#fe_formselected").val(musicNames.join(",")); //初始化已选择文本框
@@ -261,7 +262,7 @@ function initForm(pageNum, pageSize) {
             alert("请求有误！" + data);
         }
     })
-    var form_type_comtent=$("<div><div class='row labels-list'></div><div class='row labels-btn'></div></div>");
+   // var form_type_comtent=$("<div><div class='row labels-list'></div><div class='row labels-btn'></div></div>");
    /* $.get("admin/form/getSysLabels",{},function(data){
         if(data.code!=0){
             return;
