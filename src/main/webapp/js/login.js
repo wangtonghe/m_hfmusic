@@ -13,7 +13,7 @@ $(function() {
             dataType:'json',
             success: function (data) {
                 if(data.code==0){
-                    document.location = "index.shtml";
+                    document.location = "index.shtml?#";
                 }else{
                     alert(data.data);
                 }
