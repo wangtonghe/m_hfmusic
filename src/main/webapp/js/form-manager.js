@@ -43,6 +43,10 @@ $(function () {
     $(".form-manager .addform").on("click",function(){
         $(".form-manager").hide();
         $("#form_edit").show();
+        $(".form-control").val("");
+        $("#fe_formcover").fileinput("reset");
+
+
 
     });
 

@@ -41,6 +41,7 @@ $(function(){
     //弹出添加歌曲对话框
     $(".music-manager button.addmusic").on("click",function(){
         $("#add-dialog .form-control").val('');
+        $('.file-upload').fileinput('reset');
         $("#add-dialog").modal({
             backdrop: true,
             keyboard: true

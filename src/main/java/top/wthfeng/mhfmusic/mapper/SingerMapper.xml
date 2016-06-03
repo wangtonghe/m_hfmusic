@@ -15,7 +15,7 @@
     <!--根据条件获取歌手-->
     <select id="list" parameterType="top.wthfeng.mhfmusic.model.param.SingerListParam"
             resultType="top.wthfeng.mhfmusic.model.view.ViewSinger">
-        SELECT s.id singerId,s.name singerName,s.sex,count(s.id) musicNum,
+        SELECT s.id singerId,s.name singerName,s.sex,count(m.id) musicNum,
         s.portrait,s.active,s.info
         FROM singer s
         left JOIN  music m on s.id=m.singerId

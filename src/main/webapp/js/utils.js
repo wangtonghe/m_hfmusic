@@ -1,7 +1,7 @@
 /**
  * Created by wangtonghe on 2016/4/30.
  */
-var pageSize = 20;
+var pageSize = 10;
 var rootUrl = "http://wthfeng.top:8080/hfuploadserver/server/upload/file";
 var musicIds=new Array();
 var musicNames=new Array();

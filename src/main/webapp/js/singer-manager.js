@@ -4,6 +4,7 @@ $(function(){
     //弹出添加歌曲对话框
     $(".singer-manager button.addSinger").on("click",function(){
         $("#ms_add-dialog .form-control").val('');
+        $('.file-upload').fileinput('reset');
         $("#ms_add-dialog").modal({
             backdrop: true,
             keyboard: true
@@ -44,7 +45,7 @@ $(function(){
     });
 
     //删除歌手
-    $(".singer-manager ").on("click","tr .flag",function(){
+    $(".singer-manager ").on("click","tr .btn-danger",function(){
 
             var id =$(this).parent("td").siblings(":input").val();
             $.post("admin/singer/delete",{singerId:id},function(data){
